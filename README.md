@@ -151,3 +151,15 @@ The left equipment column now places Hands above Wrists, matching the native gam
 
 ## Version 1.6.11
 Equipping a two-handed weapon moves any offhand item to inventory. Equipping an offhand item moves an existing two-handed weapon to inventory. The same rule applies to inventory swaps and preserves item configuration. A full inventory blocks the operation without changing the build; invalid two-hand/offhand build codes are rejected. Includes the embedded silhouette and corrected Hands/Wrists order from 1.6.10.
+
+## Version 1.6.12
+Restored the original equipment slot order: Wrists (sleeves) above Hands (gloves). Corrected only the empty slot atlas icons: Wrists uses tile 7 and Hands uses tile 5. Equipped items, compatibility and build codes remain associated with their original slot IDs.
+
+## Version 1.6.13
+Enabled Clear/Vivid/Lucid Ancient and Eternal skill lunagem families, including Witchcraft, using database slot groups 31 (Wrists/sleeves) and 32 (Waist/belt). These special-tag families bypass the previously overrestrictive tag filter, while retaining minimum item level and socket capacity checks. Their skill-specific effects are not invented as generic character stats.
+
+## Version 1.6.14
+Perfect Earth Lunafrost is correctly offered on cloaks (+10 Stamina); only Perfect Lunasigils require Enlightened accessories. Installed gem sockets and gem search rows now show the standard item tooltip on hover/focus, with verified effect values also visible in search results. Includes skill lunagem placement support from 1.6.13.
+
+### 1.6.15
+Lunafrost / Lunastone search also matches verified effect names, such as Toughness, while retaining slot compatibility filters.

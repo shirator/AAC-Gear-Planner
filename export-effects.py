@@ -19,7 +19,7 @@ for row in c.execute('select * from item_enchanting_gems'):
 rules['sigils']={}
 for id in rules['enchants']:
  item=catalog.get(int(id));values=mods.get(('Item',int(id)),[])
- if item and item['name'].startswith('Perfect ') and values and all(m['unit_attribute_id'] in range(5) and m['unit_modifier_type_id']==0 and m['linear_level_bonus']==0 for m in values):
+ if item and item['name'].startswith('Perfect ') and item['name'].endswith('Lunasigil') and values and all(m['unit_attribute_id'] in range(5) and m['unit_modifier_type_id']==0 and m['linear_level_bonus']==0 for m in values):
   rules['sigils'][id]={'stats':{['str','dex','sta','int','spi'][m['unit_attribute_id']]:m['value'] for m in values}}
 required={r['equip_item_tag_id'] for rows in rules['enchants'].values() for r in rows if r['equip_item_tag_id']}
 for row in c.execute('select item_id,tag_id from tagged_items'):
