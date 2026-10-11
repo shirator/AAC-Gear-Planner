@@ -1,0 +1,14 @@
+{
+  "name": "aac-gear-planner",
+  "version": "1.6.11",
+  "private": true,
+  "description": "ArcheAge Classic catalog-backed gear planner",
+  "scripts": {
+    "start": "node server.cjs",
+    "test": "node --test tests.cjs",
+    "audit": "node audit.cjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

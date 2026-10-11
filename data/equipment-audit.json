@@ -1,0 +1,695 @@
+{
+  "catalog_items": 34650,
+  "catalog_equipment": 12600,
+  "exported_items": 13322,
+  "grade_records": 9329,
+  "attribute_metadata": 117,
+  "cast_time_items": [
+    {
+      "id": 3004,
+      "name": "Apprentice's Wave Ring",
+      "scaled": true
+    },
+    {
+      "id": 7714,
+      "name": "Artificer's Wave Ring",
+      "scaled": true
+    },
+    {
+      "id": 7719,
+      "name": "Artisan's Wave Ring",
+      "scaled": true
+    },
+    {
+      "id": 7724,
+      "name": "Illustrious Wave Ring",
+      "scaled": true
+    },
+    {
+      "id": 17797,
+      "name": "Delphinad Wave Ring",
+      "scaled": true
+    },
+    {
+      "id": 24098,
+      "name": "Gweonid's Rest",
+      "scaled": false
+    },
+    {
+      "id": 24691,
+      "name": "Cracked Insightful Lunafrost",
+      "scaled": false
+    },
+    {
+      "id": 24692,
+      "name": "Whole Insightful Lunafrost",
+      "scaled": false
+    },
+    {
+      "id": 24693,
+      "name": "Flawless Insightful Lunafrost",
+      "scaled": false
+    },
+    {
+      "id": 27048,
+      "name": "Magnificent Mirage Wave Ring",
+      "scaled": true
+    },
+    {
+      "id": 27056,
+      "name": "Mirage Gweonid Serenity",
+      "scaled": false
+    },
+    {
+      "id": 28660,
+      "name": "Bright Gweonid Serenity",
+      "scaled": false
+    },
+    {
+      "id": 28661,
+      "name": "Solid Gweonid Serenity",
+      "scaled": false
+    },
+    {
+      "id": 28662,
+      "name": "Hopeful Gweonid Serenity",
+      "scaled": false
+    },
+    {
+      "id": 28663,
+      "name": "Opulent Gweonid Serenity",
+      "scaled": false
+    },
+    {
+      "id": 28955,
+      "name": "Gemfast Circlet",
+      "scaled": false
+    },
+    {
+      "id": 28958,
+      "name": "Aranzeb's Gemfast Circlet",
+      "scaled": false
+    },
+    {
+      "id": 29536,
+      "name": "Flaming Wave Ember Ring",
+      "scaled": true
+    },
+    {
+      "id": 29537,
+      "name": "Windy Wave Ember Ring",
+      "scaled": true
+    },
+    {
+      "id": 29538,
+      "name": "Tidal Wave Ember Ring",
+      "scaled": true
+    },
+    {
+      "id": 29539,
+      "name": "Flaming Wave Blaze Ring",
+      "scaled": true
+    },
+    {
+      "id": 29540,
+      "name": "Windy Wave Blaze Ring",
+      "scaled": true
+    },
+    {
+      "id": 29541,
+      "name": "Tidal Wave Blaze Ring",
+      "scaled": true
+    },
+    {
+      "id": 29542,
+      "name": "Flaming Wave Scorch Ring",
+      "scaled": true
+    },
+    {
+      "id": 29543,
+      "name": "Windy Wave Scorch Ring",
+      "scaled": true
+    },
+    {
+      "id": 29544,
+      "name": "Tidal Wave Scorch Ring",
+      "scaled": true
+    },
+    {
+      "id": 29857,
+      "name": "Red Dragon's Serenity",
+      "scaled": false
+    },
+    {
+      "id": 29866,
+      "name": "Enraged Red Dragon's Serenity",
+      "scaled": false
+    },
+    {
+      "id": 30955,
+      "name": "Clear Gale Lunagem: Torrent",
+      "scaled": false
+    },
+    {
+      "id": 30978,
+      "name": "Vivid Gale Lunagem: Torrent",
+      "scaled": false
+    },
+    {
+      "id": 31001,
+      "name": "Lucid Gale Lunagem: Torrent",
+      "scaled": false
+    },
+    {
+      "id": 31603,
+      "name": "Craftsman's Wave Ring",
+      "scaled": true
+    },
+    {
+      "id": 31616,
+      "name": "Conqueror's Wave Ring",
+      "scaled": true
+    },
+    {
+      "id": 31631,
+      "name": "Magnificent Wave Ring",
+      "scaled": true
+    },
+    {
+      "id": 31646,
+      "name": "Epherium Wave Ring",
+      "scaled": true
+    },
+    {
+      "id": 31661,
+      "name": "Ayanad Wave Ring",
+      "scaled": true
+    },
+    {
+      "id": 33065,
+      "name": "Hopes for Peace",
+      "scaled": false
+    },
+    {
+      "id": 34587,
+      "name": "(deprecated) \ud751\uc625 \ud0dc\ub3c4",
+      "scaled": false
+    },
+    {
+      "id": 34593,
+      "name": "(deprecated) \ud751\uc625 \ucc3d",
+      "scaled": false
+    },
+    {
+      "id": 34605,
+      "name": "Obsidian Katana",
+      "scaled": false
+    },
+    {
+      "id": 34611,
+      "name": "Obsidian Shortspear",
+      "scaled": false
+    },
+    {
+      "id": 34622,
+      "name": "Ominous Obsidian Katana",
+      "scaled": false
+    },
+    {
+      "id": 34628,
+      "name": "Ominous Obsidian Shortspear",
+      "scaled": false
+    },
+    {
+      "id": 34639,
+      "name": "Cursed Obsidian Katana",
+      "scaled": false
+    },
+    {
+      "id": 34645,
+      "name": "Cursed Obsidian Shortspear",
+      "scaled": false
+    },
+    {
+      "id": 34656,
+      "name": "Mooncaller",
+      "scaled": false
+    },
+    {
+      "id": 34662,
+      "name": "Blackleaf",
+      "scaled": false
+    },
+    {
+      "id": 34673,
+      "name": "Fallen Moon",
+      "scaled": false
+    },
+    {
+      "id": 34679,
+      "name": "Twilight Leaf",
+      "scaled": false
+    },
+    {
+      "id": 34690,
+      "name": "Scoundrel's Moon",
+      "scaled": false
+    },
+    {
+      "id": 34696,
+      "name": "Leafshredder",
+      "scaled": false
+    },
+    {
+      "id": 35534,
+      "name": "Sleeper's Point",
+      "scaled": false
+    },
+    {
+      "id": 35536,
+      "name": "Songblade",
+      "scaled": false
+    },
+    {
+      "id": 35538,
+      "name": "Starlit Herald",
+      "scaled": false
+    },
+    {
+      "id": 35539,
+      "name": "Oathmaker",
+      "scaled": false
+    },
+    {
+      "id": 35542,
+      "name": "Seer's Vision",
+      "scaled": false
+    },
+    {
+      "id": 35546,
+      "name": "Dreamer's Point",
+      "scaled": false
+    },
+    {
+      "id": 35548,
+      "name": "Hymnblade",
+      "scaled": false
+    },
+    {
+      "id": 35550,
+      "name": "Moonlit Herald",
+      "scaled": false
+    },
+    {
+      "id": 35551,
+      "name": "Oathkeeper",
+      "scaled": false
+    },
+    {
+      "id": 35554,
+      "name": "Diviner's Dream",
+      "scaled": false
+    },
+    {
+      "id": 35558,
+      "name": "Nightmare Point",
+      "scaled": false
+    },
+    {
+      "id": 35560,
+      "name": "Dirgebringer",
+      "scaled": false
+    },
+    {
+      "id": 35562,
+      "name": "Sunlord's Conquest",
+      "scaled": false
+    },
+    {
+      "id": 35563,
+      "name": "Eternal Bond",
+      "scaled": false
+    },
+    {
+      "id": 35566,
+      "name": "Prophet's Promise",
+      "scaled": false
+    },
+    {
+      "id": 35585,
+      "name": "Obsidian Shoes",
+      "scaled": false
+    },
+    {
+      "id": 35600,
+      "name": "Ominous Obsidian Shoes",
+      "scaled": false
+    },
+    {
+      "id": 35615,
+      "name": "Cursed Obsidian Shoes",
+      "scaled": false
+    },
+    {
+      "id": 35630,
+      "name": "Flaming Passion Shoes",
+      "scaled": false
+    },
+    {
+      "id": 35643,
+      "name": "Pure Pants",
+      "scaled": false
+    },
+    {
+      "id": 35660,
+      "name": "Kindled Passion Shoes",
+      "scaled": false
+    },
+    {
+      "id": 35673,
+      "name": "Purehearted Pants",
+      "scaled": false
+    },
+    {
+      "id": 35690,
+      "name": "Cold Flames Shoes",
+      "scaled": false
+    },
+    {
+      "id": 35703,
+      "name": "Purehearted Goddess Pants",
+      "scaled": false
+    },
+    {
+      "id": 36519,
+      "name": "PC\ubc29\uc758 \uc2e0\uae30\ub8e8 \ucd08\uc2ec\uc790 \uc2dc\uc804\uc18d\ub3c4 \ubaa9\uac78\uc774",
+      "scaled": true
+    },
+    {
+      "id": 36520,
+      "name": "PC\ubc29\uc758 \uc2e0\uae30\ub8e8 \uc219\ub828\uc790 \uc2dc\uc804\uc18d\ub3c4 \ubaa9\uac78\uc774",
+      "scaled": true
+    },
+    {
+      "id": 36521,
+      "name": "PC\ubc29\uc758 \uc2e0\uae30\ub8e8 \uc0c1\uae09\uc790 \uc2dc\uc804\uc18d\ub3c4 \ubaa9\uac78\uc774",
+      "scaled": true
+    },
+    {
+      "id": 36522,
+      "name": "PC\ubc29\uc758 \uc2e0\uae30\ub8e8 \ucd08\uc2ec\uc790 \uc2dc\uc804\uc18d\ub3c4 \uadc0\uac78\uc774",
+      "scaled": true
+    },
+    {
+      "id": 36523,
+      "name": "PC\ubc29\uc758 \uc2e0\uae30\ub8e8 \uc219\ub828\uc790 \uc2dc\uc804\uc18d\ub3c4 \uadc0\uac78\uc774",
+      "scaled": true
+    },
+    {
+      "id": 36524,
+      "name": "PC\ubc29\uc758 \uc2e0\uae30\ub8e8 \uc0c1\uae09\uc790 \uc2dc\uc804\uc18d\ub3c4 \uadc0\uac78\uc774",
+      "scaled": true
+    },
+    {
+      "id": 36525,
+      "name": "PC\ubc29\uc758 \uc2e0\uae30\ub8e8 \ucd08\uc2ec\uc790 \uc2dc\uc804\uc18d\ub3c4 \ubc18\uc9c0",
+      "scaled": true
+    },
+    {
+      "id": 36526,
+      "name": "PC\ubc29\uc758 \uc2e0\uae30\ub8e8 \uc219\ub828\uc790 \uc2dc\uc804\uc18d\ub3c4 \ubc18\uc9c0",
+      "scaled": true
+    },
+    {
+      "id": 36527,
+      "name": "PC\ubc29\uc758 \uc2e0\uae30\ub8e8 \uc0c1\uae09\uc790 \uc2dc\uc804\uc18d\ub3c4 \ubc18\uc9c0",
+      "scaled": true
+    },
+    {
+      "id": 38038,
+      "name": "Erenor Hero Cloak",
+      "scaled": false
+    },
+    {
+      "id": 38039,
+      "name": "Erenor Hero Cloak",
+      "scaled": false
+    },
+    {
+      "id": 38040,
+      "name": "Erenor Hero Cloak",
+      "scaled": false
+    },
+    {
+      "id": 38041,
+      "name": "Erenor Hero Cloak",
+      "scaled": false
+    },
+    {
+      "id": 38681,
+      "name": "Delphinad Hatchetblade Cloak",
+      "scaled": false
+    },
+    {
+      "id": 38682,
+      "name": "Epherium Hatchetblade Cloak",
+      "scaled": false
+    },
+    {
+      "id": 38683,
+      "name": "Delphinad Flaming Hatchetblade Cloak",
+      "scaled": false
+    },
+    {
+      "id": 38863,
+      "name": "Heartless Necromancer's Vision",
+      "scaled": false
+    },
+    {
+      "id": 39069,
+      "name": "Vivid Gale Lunascale: Torrent",
+      "scaled": false
+    },
+    {
+      "id": 39246,
+      "name": "Ayanad Hatchetblade Cloak",
+      "scaled": false
+    },
+    {
+      "id": 39247,
+      "name": "Ayanad Flaming Hatchetblade Cloak",
+      "scaled": false
+    },
+    {
+      "id": 39749,
+      "name": "Disciple's Magic Ring",
+      "scaled": true
+    },
+    {
+      "id": 40477,
+      "name": "Amethyst Daeier Necklace (Rank 7)",
+      "scaled": false
+    },
+    {
+      "id": 40478,
+      "name": "Jade Daeier Necklace (Rank 8)",
+      "scaled": false
+    },
+    {
+      "id": 40479,
+      "name": "Diamond Daeier Necklace (Rank 9)",
+      "scaled": false
+    },
+    {
+      "id": 40480,
+      "name": "Archeum Daeier Necklace (Rank 10)",
+      "scaled": false
+    },
+    {
+      "id": 40481,
+      "name": "Archeum Daeier Necklace (Rank 11)",
+      "scaled": false
+    },
+    {
+      "id": 40482,
+      "name": "Archeum Daeier Necklace (Rank 12)",
+      "scaled": false
+    },
+    {
+      "id": 40483,
+      "name": "Archeum Daeier Necklace (Rank 13)",
+      "scaled": false
+    },
+    {
+      "id": 40574,
+      "name": "Insanity Point",
+      "scaled": false
+    },
+    {
+      "id": 40583,
+      "name": "Moonsong Razor",
+      "scaled": false
+    },
+    {
+      "id": 40585,
+      "name": "Moonsong Razor",
+      "scaled": false
+    },
+    {
+      "id": 40595,
+      "name": "Nui's Dawn",
+      "scaled": false
+    },
+    {
+      "id": 40597,
+      "name": "Nui's Dawn",
+      "scaled": false
+    },
+    {
+      "id": 40599,
+      "name": "Nui's Devotion",
+      "scaled": false
+    },
+    {
+      "id": 40601,
+      "name": "Nui's Devotion",
+      "scaled": false
+    },
+    {
+      "id": 40602,
+      "name": "Fatesealer",
+      "scaled": false
+    },
+    {
+      "id": 40604,
+      "name": "Fatesealer",
+      "scaled": false
+    },
+    {
+      "id": 40612,
+      "name": "Blind Fate",
+      "scaled": false
+    },
+    {
+      "id": 40613,
+      "name": "Blind Fate",
+      "scaled": false
+    },
+    {
+      "id": 40638,
+      "name": "Ehno\u00efr Pants",
+      "scaled": false
+    },
+    {
+      "id": 40639,
+      "name": "Ehno\u00efr Pants",
+      "scaled": false
+    },
+    {
+      "id": 40644,
+      "name": "Ehno\u00efr Shoes",
+      "scaled": false
+    },
+    {
+      "id": 40645,
+      "name": "Ehno\u00efr Shoes",
+      "scaled": false
+    },
+    {
+      "id": 41023,
+      "name": "Nightmare Point",
+      "scaled": false
+    },
+    {
+      "id": 41029,
+      "name": "Purehearted Goddess Pants",
+      "scaled": false
+    },
+    {
+      "id": 42193,
+      "name": "PC\ubc29: \uc774\uae00\uac70\ub9ac\ub294 \uc5f4\uc815\uc758 \uc2e0\ubc1c",
+      "scaled": false
+    },
+    {
+      "id": 42201,
+      "name": "PC\ubc29: \uc21c\uc218\ud55c \ub9c8\uc74c\uc758 \ud558\uc758",
+      "scaled": false
+    },
+    {
+      "id": 42221,
+      "name": "PC\ubc29: \ub208\ubb3c \uc548\uc2dd \ub9dd\ud1a0",
+      "scaled": false
+    },
+    {
+      "id": 43123,
+      "name": "Erenor Hatchetblade Cloak",
+      "scaled": false
+    },
+    {
+      "id": 43124,
+      "name": "Erenor Flaming Hatchetblade Cloak",
+      "scaled": false
+    },
+    {
+      "id": 9001087,
+      "name": "Purehearted Goddess Pants",
+      "scaled": false
+    },
+    {
+      "id": 9001103,
+      "name": "Cold Flames Shoes",
+      "scaled": false
+    },
+    {
+      "id": 9001116,
+      "name": "Nightmare Point",
+      "scaled": false
+    },
+    {
+      "id": 9001121,
+      "name": "Scoundrel's Moon",
+      "scaled": false
+    },
+    {
+      "id": 9001122,
+      "name": "Dirgebringer",
+      "scaled": false
+    },
+    {
+      "id": 9001126,
+      "name": "Sunlord's Conquest",
+      "scaled": false
+    },
+    {
+      "id": 9001129,
+      "name": "Eternal Bond",
+      "scaled": false
+    },
+    {
+      "id": 9001131,
+      "name": "Leafshredder",
+      "scaled": false
+    },
+    {
+      "id": 9001141,
+      "name": "Prophet's Promise",
+      "scaled": false
+    },
+    {
+      "id": 9001883,
+      "name": "Enlightened Ayanad Wave Ring",
+      "scaled": true
+    },
+    {
+      "id": 9001932,
+      "name": "Enlightened Oracle Ring",
+      "scaled": false
+    }
+  ],
+  "unmapped_attributes": {
+    "191": 16
+  },
+  "scaled_modifiers": 2949,
+  "non_additive_modifiers": 0,
+  "dynamic_buffs": 188
+}

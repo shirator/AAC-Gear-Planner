@@ -1,0 +1,142 @@
+{
+  "catalogItems": 34650,
+  "modifierRecords": 13322,
+  "buffRecords": 22169,
+  "passives": 70,
+  "gradePairs": 9329,
+  "pairsWithUnresolvedEffects": 1368,
+  "missingBuffReferences": [
+    {
+      "item": 48139,
+      "buff": 25304
+    },
+    {
+      "item": 48143,
+      "buff": 25337
+    },
+    {
+      "item": 48144,
+      "buff": 25337
+    },
+    {
+      "item": 48145,
+      "buff": 25337
+    },
+    {
+      "item": 48146,
+      "buff": 25337
+    },
+    {
+      "item": 52269,
+      "buff": 30561
+    },
+    {
+      "item": 52725,
+      "buff": 28302
+    },
+    {
+      "item": 53160,
+      "buff": 31436
+    },
+    {
+      "item": 53161,
+      "buff": 31437
+    },
+    {
+      "item": 53162,
+      "buff": 31438
+    },
+    {
+      "item": 9000546,
+      "buff": 31437
+    },
+    {
+      "item": 9000967,
+      "buff": 31437
+    }
+  ],
+  "unknownAttributes": {
+    "5": 2,
+    "14": 1,
+    "18": 3,
+    "23": 3,
+    "28": 1,
+    "30": 1,
+    "36": 2,
+    "46": 2,
+    "47": 1,
+    "48": 1,
+    "61": 1,
+    "73": 33,
+    "75": 2,
+    "93": 5,
+    "124": 5,
+    "125": 5,
+    "128": 14,
+    "129": 4,
+    "130": 11,
+    "131": 5,
+    "132": 19,
+    "133": 23,
+    "134": 3,
+    "135": 21,
+    "137": 28,
+    "152": 1,
+    "154": 52,
+    "155": 6,
+    "156": 14,
+    "157": 9,
+    "173": 36,
+    "194": 9,
+    "196": 27,
+    "197": 27,
+    "198": 27,
+    "202": 1,
+    "217": 1
+  },
+  "dynamicBuffs": 188,
+  "nakedCharacter": {
+    "Strength": 158,
+    "Agility": 158,
+    "Stamina": 158,
+    "Intelligence": 158,
+    "Spirit": 158,
+    "Melee Attack": 31.6,
+    "Ranged Attack": 31.6,
+    "Magic Attack": 31.6,
+    "Healing Power": 31.6,
+    "Physical Defense": 0,
+    "Magic Defense": 158,
+    "Health": 10246,
+    "Mana": 7496,
+    "Cast Time": 100,
+    "Move Speed": 5.4,
+    "Attack Speed": 0,
+    "Melee Attack Speed": 1.4,
+    "Attack Animation Speed": 0,
+    "Melee Accuracy": 94.63550723090044,
+    "Melee Critical Rate": 4.328665144694267,
+    "Melee Critical Damage": 50,
+    "Ranged Accuracy": 94.63550723090044,
+    "Ranged Critical Rate": 4.328665144694267,
+    "Ranged Critical Damage": 50,
+    "Magic Accuracy": 94.63550723090044,
+    "Magic Critical Rate": 4.328665144694267,
+    "Magic Critical Bonus": 50,
+    "Critical Heal Rate": 4.328665144694267,
+    "Critical Heal Bonus": 50,
+    "Parry Rate": 0,
+    "Shield Block Rate": 0,
+    "Evasion": 3.4629321157554136,
+    "Health Regen": 81.6,
+    "Mana Regen": 46.6,
+    "Continuous Health Regen": 0,
+    "Post-Cast Mana Regen": 0,
+    "Melee Damage Reduction": 0,
+    "Fixed Melee Damage Reduction": 0,
+    "Ranged Damage Reduction": 0,
+    "Fixed Ranged Damage Reduction": 0,
+    "Magic Damage Reduction": 1.9607843137254901,
+    "Fixed Magic Damage Reduction": 0.28752024246376034
+  }
+}
