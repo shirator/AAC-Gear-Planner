@@ -163,3 +163,12 @@ Perfect Earth Lunafrost is correctly offered on cloaks (+10 Stamina); only Perfe
 
 ### 1.6.15
 Lunafrost / Lunastone search also matches verified effect names, such as Toughness, while retaining slot compatibility filters.
+
+### 1.6.16
+Weapon hand choices follow database restrictions. Removed instrument temper controls and tooltip text.
+
+### 1.6.17
+Include offhand weapon Healing Power (including both Blind Fate variants), with grade and magic temper scaling.
+
+### 1.6.18
+Compressed AAC2 share codes, with lossless build data and legacy AAC1 import support. No server storage needed.

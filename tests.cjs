@@ -77,3 +77,31 @@ test('Two-handed weapons move conflicting hands to inventory atomically, includi
 test('Witchcraft skill lunagems fit belt and sleeves with level and capacity restrictions',()=>{const belt=db.items.find(i=>i.id===31578),sleeves=db.items.find(i=>i.id===38220),head=db.items.find(i=>i.id===31572);for(const id of [38174,38154,38134]){const gem=db.items.find(i=>i.id===id);assert.equal(S.compatible(gem,belt,9,rules),true);assert.equal(S.compatible(gem,sleeves,9,rules),false);assert.equal(S.compatible(gem,head,9,rules),false);}for(const id of [38164,38144,38124]){const gem=db.items.find(i=>i.id===id);assert.equal(S.compatible(gem,sleeves,9,rules),true);assert.equal(S.compatible(gem,belt,9,rules),false);}const state=P.empty();state.equipment.waist={id:belt.id,grade:9,gems:[38174]};assert.equal(P.decode(P.encode(state),db,rules).equipment.waist.gems[0],38174);const gem=db.items.find(i=>i.id===38174);assert.equal(S.compatible(gem,{...belt,level:40},9,{...rules,armors:{...rules.armors,[belt.id]:{...rules.armors[belt.id],level:40}}}),false);assert.ok(S.choices(db.items,belt,9,rules).some(i=>i.id===38174));});
 
 test('Perfect Earth Lunafrost is a cloak enchant and adds 10 Stamina, not an Enlightened sigil',()=>{const frost=db.items.find(i=>i.id===26857),cloak=db.items.find(i=>i.id===43119);assert.equal(S.enchantCompatible(frost,cloak,rules),true);assert.equal(S.enchantCompatible(frost,db.items.find(i=>i.id===31572),rules),false);const state=P.empty();state.equipment.cloak={id:cloak.id,grade:11,enchant:frost.id};assert.equal(P.decode(P.encode(state),db,rules).equipment.cloak.enchant,frost.id);const without=structuredClone(state);delete without.equipment.cloak.enchant;assert.equal(M.summarize(state,db.items,effectDB,rules).sum.sta-M.summarize(without,db.items,effectDB,rules).sum.sta,10);const E=require('./effects.js'),gem=db.items.find(i=>i.id===8001159);assert.ok(E.itemEffects(gem,gem.grade,effectDB).entries.some(e=>e.attribute==='armor'&&e.value>0));});
+
+test('weapon hand restrictions follow database types for picker, equip, inventory and import',()=>{
+ for(const item of db.items.filter(i=>i.impl_id===1&&rules.weapons[i.id])){
+  const type=rules.weapons[item.id].slot_type_id;
+  if([14,16].includes(type))assert.equal(P.compatible(item,'off',rules),false,item.name);
+ }
+ const club=db.items.find(i=>i.category==='Club'&&i.grade===-1),entry={id:club.id,grade:7};
+ assert.equal(P.compatible(club,'main',rules),true);assert.equal(P.compatible(club,'off',rules),false);
+ assert.doesNotThrow(()=>P.equip(P.empty(),'main',entry,db,rules));
+ assert.throws(()=>P.equip(P.empty(),'off',entry,db,rules));
+ const s=P.empty();s.inventory=[{...entry,slot:'main'}];assert.throws(()=>P.swap(s,0,'off',db,rules));assert.equal(s.inventory.length,1);
+ s.inventory=[];s.equipment.off=entry;assert.throws(()=>P.decode(P.encode(s),db,rules));
+ const sword=db.items.find(i=>i.category==='Sword'&&rules.weapons[i.id]?.slot_type_id===17);assert.equal(P.compatible(sword,'off',rules),true);
+ const shield=db.items.find(i=>i.category==='Shield'&&rules.weapons[i.id]?.slot_type_id===20);assert.equal(P.compatible(shield,'off',rules),true);
+});
+
+test('Blind Fate offhand healing power contributes once with grade and magic temper',()=>{
+ const M=require('./character-model.js'),d=require('./data/equipment-effects.json');
+ for(const id of [40612,40613])for(const grade of [0,7,9,11])for(const magic of [0,11]){
+  const state=P.empty();state.equipment.off={id,grade,temper:{physical:0,magic}};
+  P.validate(state,db,rules);
+  const summary=M.summarize(state,db.items,d,rules),out=M.calculate(state,db.items,d,rules,summary);
+  const weapon=C.itemValues(db.items.find(i=>i.id===id),grade,rules,{magic}).hdps;
+  assert.ok(Math.abs(out['Healing Power']-((158+summary.sum.spi)*.2+weapon+(summary.effects.totals.heal_dps_inc||0)))<1e-8);
+ }
+});
+
+test('compressed share codes are shorter, lossless and support old codes',async()=>{const s=P.empty();s.name='Build João';s.equipment.main={id:9002460,grade:7};const code=await P.encodeShort(s);assert.ok(code.startsWith('AAC2.'));assert.ok(code.length<P.encode(s).length);assert.deepEqual(await P.decodeShort(code,db,rules),P.validate(s,db,rules));assert.deepEqual(await P.decodeShort(P.encode(s),db,rules),P.validate(s,db,rules));await assert.rejects(()=>P.decodeShort('AAC2.broken',db,rules));});
