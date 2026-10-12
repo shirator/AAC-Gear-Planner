@@ -217,3 +217,6 @@ Removes gem minimum item-level filtering for level 55+ build planning. Slot, ite
 
 ## 1.9.0
 Equip armor set selects complete database sets with search, armor-type filtering, a seven-piece preview, grade and independent physical/magic temper. Only armor slots are replaced.
+
+## 1.9.1
+Tempest speed gem tooltips show one Attack Speed rating, e.g. +10 for Radiant, instead of four internal percentage modifiers.
