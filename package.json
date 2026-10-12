@@ -1,6 +1,6 @@
 {
   "name": "aac-gear-planner",
-  "version": "1.7.7",
+  "version": "1.8.0",
   "private": true,
   "description": "ArcheAge Classic catalog-backed gear planner",
   "scripts": {

@@ -208,3 +208,6 @@ Socket tooltips show gem effects without long item names. Database skill/buff mo
 
 ## 1.7.7
 Fixes disappearing character stats after switching from Compare back to Core by retaining the Stat Migration button reference.
+
+## 1.8.0
+Import game gear (.txt) reads the existing Darugear addon export locally, previews warnings, and replaces equipment while retaining character settings. Imports grades, temper, compatible sockets and synthesis; unsupported items are reported. No addon changes required.

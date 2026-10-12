@@ -98,3 +98,8 @@ function renderBuffIcons(){const audit=equipmentSummary().effects;$('activeBuffC
 $('buffDisplayTabs').onclick=e=>{const button=e.target.closest('button');if(!button?.dataset.buffTab)return;hoverCard?.remove();buffDisplay=button.dataset.buffTab;renderBuffIcons();};
 
 document.addEventListener('click',e=>{if(!e.target.closest('.buff-icon,.item-tooltip'))hoverCard?.remove();});
+
+let pendingGearImport=null;
+$('importGear').onclick=()=>{if(!loaded)return toast('Wait for the catalogs to load.');$('gearFile').value='';$('gearFile').click();};
+$('gearFile').onchange=async()=>{const file=$('gearFile').files[0];if(!file)return;try{if(file.size>2000000)throw Error('Export file is too large.');pendingGearImport=GearImport.convert(await file.text(),state,DB,rules,effectDB);$('gearImportSummary').textContent=pendingGearImport.count+' equipment slots ready to import.';$('gearImportWarnings').replaceChildren(...pendingGearImport.warnings.map(text=>el('p',text,'muted')));$('gearImportDialog').showModal();}catch(error){pendingGearImport=null;toast(error.message);}};
+$('applyGearImport').onclick=()=>{if(!pendingGearImport)return;state=pendingGearImport.build;pendingGearImport=null;$('gearImportDialog').close();hydrate();toast('Game equipment imported.');};$('cancelGearImport').onclick=()=>{pendingGearImport=null;$('gearImportDialog').close();};
