@@ -229,3 +229,6 @@ Dual-Wield Proficiency applies its +8 percentage points Melee Critical Rate on s
 
 ## 1.9.4
 Positive gem effects consistently include a plus sign in socket labels and tooltips.
+
+## 1.9.5
+Armor Equipment Points uses the Classic wearable grade multiplier. Divine Ayanad Life Hood matches 334.8 base + 67.5 modifications = 402.3 in-game.
