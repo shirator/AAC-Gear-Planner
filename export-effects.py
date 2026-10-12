@@ -74,6 +74,7 @@ for row in c.execute('select * from passive_buffs where ability_id between 1 and
  if mods.get(('Buff',d['buff_id'])) and not any(word in first for word in ['when ', 'while ', 'after ', 'if ', 'with a shield', 'dual-wielding']):
   d['conditional']=False
   if not d['children'] and not any(w in d['description'].lower() for w in ['grants','triggers','when ','while ','after ','each ']):d['related']=[]
+ if d['buff_id']==831:d['conditional']=False
  data['passives'][str(row['id'])]=d
 dynamic={}
 for row in c.execute('select * from dynamic_unit_modifiers'):dynamic.setdefault(row['buff_id'],[]).append(dict(row))

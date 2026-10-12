@@ -223,3 +223,6 @@ Tempest speed gem tooltips show one Attack Speed rating, e.g. +10 for Radiant, i
 
 ## 1.9.2
 Equipment picker sorts by item level descending, then name for equal levels.
+
+## 1.9.3
+Dual-Wield Proficiency applies its +8 percentage points Melee Critical Rate on selection. The ranged-parry condition does not gate the critical bonus.
