@@ -238,3 +238,6 @@ Equipment Points uses Classic grade factors across armor, weapons and accessorie
 
 ## 1.9.7
 Corrects the inverted raw Received Damage sign on Primal Kyrios 7-set: -4.5%, matching its explicit reduction description.
+
+## 1.9.8
+Bundles missing Searing Oath icon and Corrupted Kyrios fallback icons for the five unavailable custom Primal Kyrios image URLs. These are visual substitutes, not recovered custom Primal artwork.
