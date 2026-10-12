@@ -211,3 +211,6 @@ Fixes disappearing character stats after switching from Compare back to Core by 
 
 ## 1.8.0
 Import game gear (.txt) reads the existing Darugear addon export locally, previews warnings, and replaces equipment while retaining character settings. Imports grades, temper, compatible sockets and synthesis; unsupported items are reported. No addon changes required.
+
+## 1.8.1
+Removes gem minimum item-level filtering for level 55+ build planning. Slot, item compatibility and socket capacity restrictions remain enforced.
