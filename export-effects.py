@@ -87,6 +87,9 @@ for id,item in data['items'].items():
  for m in allmods:
   if str(m['unit_attribute_id']) not in attrs:audit['unmapped_attributes'][str(m['unit_attribute_id'])]=audit['unmapped_attributes'].get(str(m['unit_attribute_id']),0)+1
   audit['scaled_modifiers']+=bool(m['linear_level_bonus']);audit['non_additive_modifiers']+=m['unit_modifier_type_id']!=0
+# Classic Pink Goblet includes Healing Power +15% (user-confirmed server behavior).
+data['buffs']['7688']['modifiers'].append({'linear_level_bonus':0,'unit_attribute_id':175,'unit_modifier_type_id':1,'value':15})
+data['buffs']['7688']['classic_override']='Classic user-confirmed Healing Power +15%; historical modifier omitted.'
 (p/'data/equipment-effects.json').write_text(json.dumps(data,ensure_ascii=True),encoding='utf8')
 (p/'data/equipment-audit.json').write_text(json.dumps(audit,indent=2),encoding='utf8')
 print(json.dumps({**audit,'cast_time_items':len(audit['cast_time_items'])}))

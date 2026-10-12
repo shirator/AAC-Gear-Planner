@@ -184,3 +184,6 @@ Effective powers are displayed inside their Melee, Ranged, Magic and Healing gro
 
 ### 1.6.22
 Expanded Compare with evasion, parry, shield block, accuracy, critical bonuses, healing, received healing, skill and backstab damage, focus, penetration and regeneration. Uses the same stat value resolver as character tabs. Fixed, Siege and PvE reductions are excluded per user preference.
+
+### 1.7.0
+Persistent six-character share links (?s=Ab3xY7), PostgreSQL via DATABASE_URL on Render, local SQLite for offline development. Automatically loads shared links and supports link/ID input in Compare and Load. Keeps AAC2 backup codes. See DATABASE-SETUP.md. Pink Goblet of Honor includes user-confirmed Classic +15% Healing Power.
