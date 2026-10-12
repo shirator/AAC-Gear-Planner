@@ -220,3 +220,6 @@ Equip armor set selects complete database sets with search, armor-type filtering
 
 ## 1.9.1
 Tempest speed gem tooltips show one Attack Speed rating, e.g. +10 for Radiant, instead of four internal percentage modifiers.
+
+## 1.9.2
+Equipment picker sorts by item level descending, then name for equal levels.
