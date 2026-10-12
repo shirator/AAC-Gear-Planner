@@ -226,3 +226,6 @@ Equipment picker sorts by item level descending, then name for equal levels.
 
 ## 1.9.3
 Dual-Wield Proficiency applies its +8 percentage points Melee Critical Rate on selection. The ranged-parry condition does not gate the critical bonus.
+
+## 1.9.4
+Positive gem effects consistently include a plus sign in socket labels and tooltips.
