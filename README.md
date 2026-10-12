@@ -214,3 +214,6 @@ Import game gear (.txt) reads the existing Darugear addon export locally, previe
 
 ## 1.8.1
 Removes gem minimum item-level filtering for level 55+ build planning. Slot, item compatibility and socket capacity restrictions remain enforced.
+
+## 1.9.0
+Equip armor set selects complete database sets with search, armor-type filtering, a seven-piece preview, grade and independent physical/magic temper. Only armor slots are replaced.
