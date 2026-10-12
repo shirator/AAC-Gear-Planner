@@ -105,3 +105,37 @@ test('Blind Fate offhand healing power contributes once with grade and magic tem
 });
 
 test('compressed share codes are shorter, lossless and support old codes',async()=>{const s=P.empty();s.name='Build João';s.equipment.main={id:9002460,grade:7};const code=await P.encodeShort(s);assert.ok(code.startsWith('AAC2.'));assert.ok(code.length<P.encode(s).length);assert.deepEqual(await P.decodeShort(code,db,rules),P.validate(s,db,rules));assert.deepEqual(await P.decodeShort(P.encode(s),db,rules),P.validate(s,db,rules));await assert.rejects(()=>P.decodeShort('AAC2.broken',db,rules));});
+
+test('all database shields calculate physical defense with holdable grade and physical temper',()=>{
+ const shields=db.items.filter(i=>rules.weapons[i.id]?.slot_type_id===20&&!i.name.startsWith('Image Item:'));
+ assert.ok(shields.some(i=>i.id===40626));
+ for(const item of shields)for(const grade of [7,9,11]){
+  const g=rules.grades.find(g=>g.id===grade),base=rules.weapons[item.id].formula_armor==='0'?0:Math.floor(item.level**1.1*85+100)*g.var_holdable_armor*.25;
+  assert.equal(C.itemValues(item,grade,rules,{physical:12,magic:15}).defense,Math.floor(base*1.12));
+  assert.equal(C.itemValues(item,grade,rules,{physical:12,magic:0}).defense,Math.floor(base*1.12));
+ }
+ const M=require('./character-model.js'),d=require('./data/equipment-effects.json'),s=P.empty();s.equipment.off={id:40626,grade:9,temper:{physical:12,magic:0}};
+ const sum=M.summarize(s,db.items,d,rules);assert.ok(sum.sum.defense>=C.itemValues(db.items.find(i=>i.id===40626),9,rules,{physical:12}).defense);
+});
+
+test('effective stats show resilience, PvP toughness, expected power and type-specific health',()=>{
+ const M=require('./character-model.js'),d=require('./data/equipment-effects.json'),state=P.empty();
+ const summary={sum:{resilience:4922,toughness:3723,received_melee:-6,received_ranged:-12,received_magic:-3,defense:7900,magic_defense:15800,healing:20,heal_bonus:50,heal_crit:10},effects:{totals:{incoming_damage_mul:-10,melee_damage_mul:20},pending:[]}};
+ const o=M.calculate(state,db.items,d,rules,summary);
+ assert.ok(Math.abs(o['Crit Rate Reduction']-4922/36922*100)<1e-10);assert.ok(Math.abs(o['Crit Bonus Reduction']-4922/22922*100)<1e-10);
+ assert.ok(Math.abs(o['PvP Damage Reduction']-3723/11723*100)<1e-10);
+ assert.ok(Math.abs(o['Effective Melee Health']-o.Health*(11723/8000)*2/.84)<1e-8);
+ assert.ok(Math.abs(o['Effective Magic Health']-o.Health*(11723/8000)*((15800+158+7900)/7900)/.87)<1e-8);
+ assert.ok(Math.abs(o['Effective Melee Power']-o['Melee Attack']*(1+o['Melee Critical Damage']/100*o['Melee Critical Rate']/100)*1.2*o['Melee Accuracy']/100)<1e-8);
+ assert.ok(Math.abs(o['Effective Healing Power']-o['Healing Power']*(1+o['Critical Heal Bonus']/100*o['Critical Heal Rate']/100)*1.2)<1e-8);
+ summary.sum.received_magic=-90;assert.equal(M.calculate(state,db.items,d,rules,summary)['Effective Magic Health'],Infinity);
+});
+
+test('comparison covers avoidance and supported effects with matching character tab values',()=>{
+ const M=require('./character-model.js'),d=require('./data/equipment-effects.json'),s=P.empty();s.buffs=[16547,9000054];s.equipment.neck={id:40366,grade:11};
+ const summary=M.summarize(s,db.items,d,rules),derived=M.calculate(s,db.items,d,rules,summary),values=M.comparisonStats(s,db.items,d,rules);
+ for(const label of ['Evasion','Parry Rate','Shield Block Rate','Melee Accuracy','Melee Critical Damage','Healing','Received Healing','Focus','Defense Penetration','Health Regen','Mana Regen']){assert.ok(M.comparisonLabels.includes(label));assert.equal(values[label],M.statValue(label,derived,summary,d));}
+ assert.ok(values['Focus']>0);assert.ok(values['Melee Skill Damage']>0);
+ assert.ok(!M.comparisonLabels.some(l=>l.includes('Fixed')||l.includes('Siege')||l.includes('PvE')));
+ assert.equal(M.statUnit('Melee Attack Speed'),' secs');
+});

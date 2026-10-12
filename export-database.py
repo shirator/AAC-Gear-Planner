@@ -3,7 +3,7 @@ source=pathlib.Path(sys.argv[1] if len(sys.argv)>1 else 'C:/Users/cmesq/Download
 c=sqlite3.connect(source.as_uri()+'?mode=ro',uri=True);c.row_factory=sqlite3.Row
 out={'source':source.parent.name,'sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'grades':[dict(r) for r in c.execute('select * from item_grades')],'weapons':{},'armors':{},'wearable_formulas':{str(r['kind_id']):r['formula'] for r in c.execute('select * from wearable_formulas')}}
 mods={r['id']:{k:r[k] for k in ['str_weight','dex_weight','sta_weight','int_weight','spi_weight']} for r in c.execute('select * from equip_item_attr_modifiers')}
-for r in c.execute('select i.id,i.level,i.fixed_grade,i.level_requirement,w.mod_set_id,h.formula_dps,h.formula_mdps,h.formula_hdps,h.gear_score_multiplier,h.stat_multiplier,h.slot_type_id from items i join item_weapons w on w.item_id=i.id join holdables h on h.id=w.holdable_id'):
+for r in c.execute('select i.id,i.level,i.fixed_grade,i.level_requirement,w.mod_set_id,h.formula_dps,h.formula_mdps,h.formula_hdps,h.formula_armor,h.gear_score_multiplier,h.stat_multiplier,h.slot_type_id from items i join item_weapons w on w.item_id=i.id join holdables h on h.id=w.holdable_id'):
  d=dict(r);d['modifiers']=mods.get(d.pop('mod_set_id'));out['weapons'][str(d.pop('id'))]=d
 for r in c.execute('select i.id,i.level,i.fixed_grade,i.level_requirement,a.mod_set_id,a.slot_type_id,a.type_id,s.coverage,s.gear_score_multiplier,v.armor_bp,v.magic_resistance_bp from items i join item_armors a on a.item_id=i.id join wearable_slots s on s.slot_type_id=a.slot_type_id join wearables v on v.slot_type_id=a.slot_type_id and v.armor_type_id=a.type_id'):
  d=dict(r);d['modifiers']=mods.get(d.pop('mod_set_id'));out['armors'][str(d.pop('id'))]=d

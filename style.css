@@ -45,3 +45,7 @@ main{grid-template-columns:minmax(360px,420px) minmax(0,1fr)}main>*,.workspace,.
 
 .hero .character-silhouette{display:block;width:100%;max-width:225px;height:400px;object-fit:contain;opacity:.7;pointer-events:none;user-select:none;}
 @media(max-width:720px){.hero .character-silhouette{height:360px;max-width:200px;}}
+
+#statTabs{flex-wrap:wrap}#stats textarea{width:100%;box-sizing:border-box;resize:vertical;min-height:80px;background:#0d1719;color:#c6e5ed;border:1px solid #34474b;padding:10px}.comparison-scroll{overflow-x:auto;width:100%;margin-top:12px}.comparison-table{width:100%;border-collapse:collapse;font-size:11px}.comparison-table th,.comparison-table td{padding:8px 6px;border-bottom:1px solid #34413c;text-align:right}.comparison-table th:first-child,.comparison-table td:first-child{text-align:left}.comparison-up{color:#9dd99b}.comparison-down{color:#e9a1a1}
+
+.stat.stat-effective{border-left:2px solid #d4aaef;padding-left:8px;margin-top:7px;background:rgba(180,125,220,.06)}.stat.stat-effective>span,.stat.stat-effective>b{color:#d4aaef}

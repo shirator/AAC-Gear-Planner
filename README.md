@@ -172,3 +172,15 @@ Include offhand weapon Healing Power (including both Blind Fate variants), with 
 
 ### 1.6.18
 Compressed AAC2 share codes, with lossless build data and legacy AAC1 import support. No server storage needed.
+
+### 1.6.19
+Export and calculate shield physical defense using holdable armor formula, grade multiplier and physical temper.
+
+### 1.6.20
+Resilience critical reductions, Toughness PvP reduction, effective powers and PvP effective health. Compare tab imports AAC1/AAC2 without replacing current build. Based on Darugear formulas; magic effective health correctly uses magic incoming reduction. Effective power excludes target defenses and effective health excludes fixed mitigation.
+
+### 1.6.21
+Effective powers are displayed inside their Melee, Ranged, Magic and Healing groups. Effective stats use a distinct lavender accent.
+
+### 1.6.22
+Expanded Compare with evasion, parry, shield block, accuracy, critical bonuses, healing, received healing, skill and backstab damage, focus, penetration and regeneration. Uses the same stat value resolver as character tabs. Fixed, Siege and PvE reductions are excluded per user preference.
