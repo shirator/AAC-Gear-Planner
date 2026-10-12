@@ -232,3 +232,6 @@ Positive gem effects consistently include a plus sign in socket labels and toolt
 
 ## 1.9.5
 Armor Equipment Points uses the Classic wearable grade multiplier. Divine Ayanad Life Hood matches 334.8 base + 67.5 modifications = 402.3 in-game.
+
+## 1.9.6
+Equipment Points uses Classic grade factors across armor, weapons and accessories. Verified against in-game Divine hood, Celestial BloodCrimson Lightning (432) and Heroic Disciple earrings (59.0).
