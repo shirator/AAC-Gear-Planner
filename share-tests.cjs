@@ -24,3 +24,5 @@ test('complete armor sets equip seven pieces atomically with selected grade and 
 test('Radiant Tempest gem displays Attack Speed +10 without duplicate speed modifiers',()=>{const E=require('./effects.js'),gem=items.find(i=>i.id===39613),entries=E.gemDisplayEntries(gem,Math.max(0,gem.grade),effects);assert.deepEqual(entries,[{name:'Attack Speed',value:10,unit:'',displaySign:true}]);assert.equal(E.itemEffects(gem,Math.max(0,gem.grade),effects).entries.length,4);});
 
 test('Dual-Wield Proficiency adds eight melee critical rate points on selection',()=>{const state=P.empty();state.classes=['fight'];const calc=()=>M.calculate(state,items,effects,rules,M.summarize(state,items,effects,rules));const before=calc()['Melee Critical Rate'];state.passives=[32];assert.ok(Math.abs(calc()['Melee Critical Rate']-before-8)<1e-8);state.passives=[];assert.equal(calc()['Melee Critical Rate'],before);});
+
+test('Primal Kyrios seven-piece bonus reduces received damage by 4.5 percent',()=>{const E=require('./effects.js'),mod=effects.buffs[9000845].modifiers.find(m=>m.unit_attribute_id===58);assert.equal(E.resolve(mod,55,effects).value,-4.5);});

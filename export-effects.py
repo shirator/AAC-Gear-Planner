@@ -92,6 +92,10 @@ for id,item in data['items'].items():
 # Classic Pink Goblet includes Healing Power +15% (user-confirmed server behavior).
 data['buffs']['7688']['modifiers'].append({'linear_level_bonus':0,'unit_attribute_id':175,'unit_modifier_type_id':1,'value':15})
 data['buffs']['7688']['classic_override']='Classic user-confirmed Healing Power +15%; historical modifier omitted.'
+# Description explicitly says this set reduces received damage.
+for modifier in data['buffs']['9000845']['modifiers']:
+ if modifier['unit_attribute_id']==58:modifier['value']=-abs(modifier['value'])
+data['buffs']['9000845']['classic_override']='Corrected positive raw sign to match the explicit received damage reduction description.'
 (p/'data/equipment-effects.json').write_text(json.dumps(data,ensure_ascii=True),encoding='utf8')
 (p/'data/equipment-audit.json').write_text(json.dumps(audit,indent=2),encoding='utf8')
 print(json.dumps({**audit,'cast_time_items':len(audit['cast_time_items'])}))

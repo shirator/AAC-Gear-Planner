@@ -235,3 +235,6 @@ Armor Equipment Points uses the Classic wearable grade multiplier. Divine Ayanad
 
 ## 1.9.6
 Equipment Points uses Classic grade factors across armor, weapons and accessories. Verified against in-game Divine hood, Celestial BloodCrimson Lightning (432) and Heroic Disciple earrings (59.0).
+
+## 1.9.7
+Corrects the inverted raw Received Damage sign on Primal Kyrios 7-set: -4.5%, matching its explicit reduction description.
