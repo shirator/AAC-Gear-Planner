@@ -202,3 +202,6 @@ Synthesis does not contribute Equipment Points and no longer marks the score as 
 
 ## 1.7.5
 Stat Migration uses adjustment buttons, current attribute totals, colored deltas and available points. Its button appears below the five attributes.
+
+## 1.7.6
+Socket tooltips show gem effects without long item names. Database skill/buff modifiers for 60 special gem items are displayed, including Witchcraft Mitigation duration +0.6s.

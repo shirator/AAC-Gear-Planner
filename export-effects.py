@@ -7,6 +7,7 @@ c=sqlite3.connect(source.resolve().as_uri()+'?mode=ro',uri=True);c.row_factory=s
 catalog={i['id']:i for i in json.loads((p/'data/items.json').read_text(encoding='utf8'))}
 attrs=json.loads((p/'data/attribute-map.json').read_text(encoding='utf8'))
 data={'attributes':attrs,'items':{},'buffs':{},'sets':{},'source_sha256':hashlib.sha256(source.read_bytes()).hexdigest()}
+data['gem_special_effects']=json.loads((p/'data/gem-special-effects.json').read_text(encoding='utf8'))
 data['armor_grade_buffs']=[dict(r) for r in c.execute('select armor_type_id,item_grade_id,buff_id from armor_grade_buffs where item_grade_id<=11')]
 mods={}
 for row in c.execute('select * from unit_modifiers'):
