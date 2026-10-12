@@ -241,3 +241,6 @@ Corrects the inverted raw Received Damage sign on Primal Kyrios 7-set: -4.5%, ma
 
 ## 1.9.8
 Bundles missing Searing Oath icon and Corrupted Kyrios fallback icons for the five unavailable custom Primal Kyrios image URLs. These are visual substitutes, not recovered custom Primal artwork.
+
+## 1.9.9
+Replaces Primal Kyrios fallback artwork with the original five 48x48 icons extracted read-only from the installed AAClassic game_pak and converted from DDS to PNG.
