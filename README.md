@@ -205,3 +205,6 @@ Stat Migration uses adjustment buttons, current attribute totals, colored deltas
 
 ## 1.7.6
 Socket tooltips show gem effects without long item names. Database skill/buff modifiers for 60 special gem items are displayed, including Witchcraft Mitigation duration +0.6s.
+
+## 1.7.7
+Fixes disappearing character stats after switching from Compare back to Core by retaining the Stat Migration button reference.
