@@ -196,3 +196,9 @@ Identifies Healing Power attribute 173 and applies healing and magic power perce
 
 ## 1.7.3
 Frequently used buffs appear first, including Combat Manuals, Combat Scrolls and Vaughn consumable buffs identified through database skill effects. Rank selectors and search remain available.
+
+## 1.7.4
+Synthesis does not contribute Equipment Points and no longer marks the score as partial.
+
+## 1.7.5
+Stat Migration uses adjustment buttons, current attribute totals, colored deltas and available points. Its button appears below the five attributes.
