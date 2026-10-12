@@ -187,3 +187,12 @@ Expanded Compare with evasion, parry, shield block, accuracy, critical bonuses, 
 
 ### 1.7.0
 Persistent six-character share links (?s=Ab3xY7), PostgreSQL via DATABASE_URL on Render, local SQLite for offline development. Automatically loads shared links and supports link/ID input in Compare and Load. Keeps AAC2 backup codes. See DATABASE-SETUP.md. Pink Goblet of Honor includes user-confirmed Classic +15% Healing Power.
+
+## 1.7.1
+Active buffs can be removed directly with the remove button. It appears on hover or keyboard focus and stays visible on touch devices. Passive buffs retain their effect tooltips.
+
+## 1.7.2
+Identifies Healing Power attribute 173 and applies healing and magic power percentage bonuses from both Bulwark of Wisdom variants and Gray Goblet of Honor. Supported percentage bonuses show as applied in buff tooltips.
+
+## 1.7.3
+Frequently used buffs appear first, including Combat Manuals, Combat Scrolls and Vaughn consumable buffs identified through database skill effects. Rank selectors and search remain available.
