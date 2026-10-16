@@ -261,3 +261,5 @@ body>header{background:#070707}
 .class-skill-icon.passive-locked .item-icon{filter:grayscale(.55) brightness(.7)}
 .class-skill-icon.passive-locked::after{content:attr(data-required-points);position:absolute;inset:0;display:grid;place-items:center;background:#940e277d;border:1px solid #dc596a80;color:#ffe1e4;font-size:19px;font-weight:600;text-shadow:0 1px 3px #000;z-index:3;pointer-events:none}
 .class-skill-icon.passive-locked:hover::after{background:#a51a3266;border-color:#ed8a97}
+
+.record-details-header{display:flex;align-items:center;gap:12px;margin:12px 0 18px}.record-description{font-size:13px;line-height:1.7;color:var(--text)}.record-description p{margin:6px 0;overflow-wrap:anywhere}
