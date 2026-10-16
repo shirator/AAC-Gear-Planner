@@ -113,6 +113,11 @@ for row in conversion_rows:
  buff['modifiers'].append({'unit_attribute_id':conversion_attribute,'unit_modifier_type_id':0,'value':row['fixed_min'],'linear_level_bonus':0})
  buff['damage_conversion_source']={'trigger_id':row['id'],'effect_id':row['effect_id'],'event_id':4}
 
+# Classic Ayanad Life 4-piece bonus is +150 in game (user-confirmed).
+for modifier in data['buffs']['7622']['modifiers']:
+ if modifier['unit_attribute_id']==68:modifier['value']=150
+data['buffs']['7622']['classic_override']='Classic in-game Ayanad Life 4-piece Post-Cast Mana Regen +150, confirmed by user; replaces legacy raw 750.'
+
 (p/'data/equipment-effects.json').write_text(json.dumps(data,ensure_ascii=True),encoding='utf8')
 (p/'data/equipment-audit.json').write_text(json.dumps(audit,indent=2),encoding='utf8')
 print(json.dumps({**audit,'cast_time_items':len(audit['cast_time_items'])}))
