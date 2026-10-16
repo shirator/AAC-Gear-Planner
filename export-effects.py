@@ -96,6 +96,23 @@ data['buffs']['7688']['classic_override']='Classic user-confirmed Healing Power 
 for modifier in data['buffs']['9000845']['modifiers']:
  if modifier['unit_attribute_id']==58:modifier['value']=-abs(modifier['value'])
 data['buffs']['9000845']['classic_override']='Corrected positive raw sign to match the explicit received damage reduction description.'
+# Virtual planner stat: deterministic health restoration as a percentage of received damage.
+# These are damage-triggered HealEffects, not ordinary unit_modifiers. They do not
+# reduce damage or represent HP/second. The raw fixed heal coefficient is in tenths.
+conversion_attribute=900000140
+data['attributes'][str(conversion_attribute)]={'attribute':'received_damage_to_health','name':'Damage Converted to Health','unit_multiplier':0.1,'unit_suffix':'%','source':'buff_triggers event 4 -> percent HealEffect; virtual planner attribute'}
+conversion_rows=c.execute("select t.*,h.fixed_min,h.fixed_max from buff_triggers t join effects e on e.id=t.effect_id and e.actual_type='HealEffect' join heal_effects h on h.id=e.actual_id where t.use_damage_amount=1 and t.event_id=4 and h.percent=1 and h.fixed_min=h.fixed_max and h.use_fixed_heal=1 and h.use_level_heal=0 and h.use_charged_buff=0").fetchall()
+conversion_seen=set()
+for row in conversion_rows:
+ if row['source_agent_id'] or row['target_agent_id'] or any(row[key] for key in row.keys() if key.endswith('_tag_id')):continue
+ if row['buff_id'] in conversion_seen:continue
+ buff=data['buffs'].get(str(row['buff_id']))
+ if not buff:continue
+ conversion_seen.add(row['buff_id'])
+ buff['modifiers']=[mod for mod in buff['modifiers'] if mod['unit_attribute_id']!=conversion_attribute]
+ buff['modifiers'].append({'unit_attribute_id':conversion_attribute,'unit_modifier_type_id':0,'value':row['fixed_min'],'linear_level_bonus':0})
+ buff['damage_conversion_source']={'trigger_id':row['id'],'effect_id':row['effect_id'],'event_id':4}
+
 (p/'data/equipment-effects.json').write_text(json.dumps(data,ensure_ascii=True),encoding='utf8')
 (p/'data/equipment-audit.json').write_text(json.dumps(audit,indent=2),encoding='utf8')
 print(json.dumps({**audit,'cast_time_items':len(audit['cast_time_items'])}))

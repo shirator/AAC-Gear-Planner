@@ -2,9 +2,19 @@
 
 Local English planner with 19 equipment slots, skillsets, skills, buffs, item icons, native grade frames, migration, temper, gem sockets, Lunafrost/Lunastone selection and a 48-item inventory.
 
+
+## Version 1.10.0
+
+- Black responsive layout with character/inventory on the left, equipment in the center, and a fixed item editor on the right.
+- Compact item, gem and Lunafrost editing with set previews; inventory defaults to All items.
+- Class window groups skills/passives by skillset and unlock level, with a 28-point budget, passive prerequisites, red lock overlays and fast icon selection. Conditional combat buffs are activated separately.
+- Passive tooltips preview effects before selection; buff tooltips group matching proficiency bonuses.
+- Damage Converted to Health is included in Regen/Misc, comparison and source inspection from verified received-damage heal triggers.
+- Migration supports -155 per attribute. Empty slot icons and grade frames use individual local PNGs.
+
 ## Run
 
-Requires Node.js 18 or later; no dependencies need installing. Double-click `iniciar.cmd`, or run `npm start` in this folder. Open http://localhost:3000. To use another port in PowerShell: `$env:PORT='3002'; npm start`.
+Requires Node.js 22.13 or later. Run `npm ci` to install the locked dependencies. Double-click `iniciar.cmd`, or run `npm start` in this folder. Open http://localhost:3000. To use another port in PowerShell: `$env:PORT='3002'; npm start`.
 
 When updating, stop the old server, restart it and refresh with Ctrl+F5. Do not open index.html directly. Catalogs and exported calculation data are bundled. Item details and uncached icons need internet access and are cached locally.
 
@@ -14,7 +24,7 @@ Click an equipment icon to select an item, grade, physical/magic temper, gems an
 
 In Inventory, choose a slot type and click Add item. Click a stored item to choose its destination and Swap equipment. The equipped piece returns to that inventory position; swapping into an empty slot removes the stored entry. Edit item changes the stored configuration. Inventory items do not affect stats until equipped.
 
-Gem choices are sorted by grade descending. Among compatible gems with identical complete numeric modifier lists, only the highest-grade representative is shown. Selected gems in older builds remain preserved. The same gem can occupy several sockets. Socket count, placement, minimum level and required tags are validated independently of the visual deduplication.
+Gem choices are sorted by grade descending. Among compatible gems with identical complete numeric modifier lists, only the highest-grade representative is shown. Selected gems in older builds remain preserved. The same gem can occupy several sockets. Socket count, placement, required tags are validated independently of the visual deduplication.
 
 Lunafrost/Lunastone placement checks item slot groups, exact item restrictions and required tags from item_enchanting_gems. Only one enchantment is allowed per item, separately from sockets. Special restriction semantics that are not established are excluded. Lunafrost sets are counted independently of armor sets. Cumulative tiers replace lower tiers when their complete modifier lists include those lower effects, avoiding double counting. Perfect Lunasigils require Enlightened necklace/earring/ring items, including the user-confirmed restriction for Perfect Tidal despite its missing database tag.
 
@@ -22,7 +32,7 @@ Save / share code and browser storage preserve inventory, grades, gems, enchantm
 
 ## Calculations and audit
 
-All characters use Level 55 / Ancestral 7 and 158 base points per core stat. Migration freely transfers up to 300 points (Migration Scale unlocked), with balanced additions/removals, steps of five and maximum removal of 150 from each stat. Your choices are not fixed to any particular attributes.
+All characters use Level 55 / Ancestral 7 and 158 base points per core stat. Migration freely transfers up to 300 points (Migration Scale unlocked), with balanced additions/removals, steps of five and maximum removal of 155 from each stat. Your choices are not fixed to any particular attributes.
 
 Physical temper (0–15%) scales physical defense and Melee/Ranged weapon DPS. Magic temper independently scales magic defense, Magic DPS and Healing Power, following the user's confirmed rule. Core stats are unaffected. Fractions are retained; display rounds values.
 

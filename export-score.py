@@ -16,4 +16,5 @@ for r in c.execute("select s.skill_id,s.start_level,s.end_level,b.buff_id from s
  rows=rules['skill_buffs'].setdefault(str(r['skill_id']),[])
  if not any(x['buff_id']==r['buff_id'] for x in rows):rows.append({'buff_id':r['buff_id'],'rank':int(match[2]),'start_level':r['start_level'],'end_level':r['end_level']})
 for rows in rules['skill_buffs'].values():rows.sort(key=lambda r:r['rank'])
+rules['class_skills']={str(r['id']):{'level':r['ability_level'],'high_ability_id':r['high_ability_id']} for r in c.execute('select id,ability_level,high_ability_id from skills where show=1 and category_id=1 and ability_id between 1 and 10')}
 (p/'data/rules.json').write_text(json.dumps(rules),encoding='utf8')
