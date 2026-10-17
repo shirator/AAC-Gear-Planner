@@ -271,3 +271,9 @@ button.danger,#itemDetail .equipment-footer button.danger{background:#7c2630;bor
 /* Keep wheel and touch scrolling inside the item drawer at its boundaries. */
 #picker.equipment-drawer,#picker.equipment-drawer.editing-equipment{overscroll-behavior-y:contain}
 .item-tooltip{overscroll-behavior-y:contain}
+
+/* Native option popups need explicit foreground and background on Windows. */
+select{color-scheme:dark}
+select option,select optgroup{background-color:#121212;color:#e7e9e7}
+select option:disabled{color:#929292}
+@media(forced-colors:active){select option,select optgroup{background-color:Canvas;color:CanvasText}select option:disabled{color:GrayText}}
