@@ -277,3 +277,5 @@ select{color-scheme:dark}
 select option,select optgroup{background-color:#121212;color:#e7e9e7}
 select option:disabled{color:#929292}
 @media(forced-colors:active){select option,select optgroup{background-color:Canvas;color:CanvasText}select option:disabled{color:GrayText}}
+
+.stat-sources-dialog .source-total{color:#f2f2f2}.stat-sources-dialog .source-total>b{color:#fff;font-weight:700}.stat-sources-dialog .source-part>b{color:#e7e9e7;white-space:nowrap}.stat-sources-dialog .source-modifiers{color:#b5bdc5;font-size:11px;font-weight:400}
