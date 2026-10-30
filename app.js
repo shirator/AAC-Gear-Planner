@@ -72,7 +72,7 @@ function renderComparison(){
  }
  panel.append(el('p','Difference compares the other build against the current build. Effective Health assumes PvP damage and includes Toughness; Effective Power estimates average output before target defenses.','muted'),wrap,pvpDetails);
 }
-function renderStats(){if(tab==='compare'){renderComparison();return;}const e=equipmentSummary(),sum=e.sum;const derived=loaded?CharacterModel.calculate(state,DB.items,effectDB,rules,e):{};$("healthTotal").textContent=Math.round(derived.Health||0).toLocaleString("en-US");$("manaTotal").textContent=Math.round(derived.Mana||0).toLocaleString("en-US");for(const [id,attribute]of [['healthTotal','max_health'],['manaTotal','max_mana']])if(e.effects.pending.some(p=>effectDB.attributes[p.raw?.unit_attribute_id]?.attribute===attribute&&p.reason?.startsWith('Armor grade buff'))){$(id).textContent+=' · Partial';$(id).title='Armor grade buff contribution is excluded because item-level data is unavailable.';}const score=C.equipmentScore(state,DB.items,rules);$('equipmentPoints').textContent=Number(score.total.toFixed(1)).toLocaleString('en-US')+(score.pending.length?' · Partial':'');$('equipmentPoints').title='Base '+score.base.toFixed(1)+' + gems / lunafrosts '+score.modifications.toFixed(1)+(score.pending.length?' · '+score.pending.map(p=>p.slot+': '+p.reason).join('; '):'');const coreStats=CharacterStats.keys.map(k=>[CharacterStats.effects[k][0],158+(state.migration?.[k]||0)+sum[k]]);const fields={core:[['Melee Attack',null],['Ranged Attack',null],['Magic Attack',null],['Healing Power',null],['Physical Defense',sum.defense],['Magic Defense',sum.magic_defense],...['Strength','Spirit','Intelligence','Stamina','Agility'].map(label=>coreStats.find(x=>x[0]===label)),['Move Speed',sum.move_speed],['Cast Time',100+(sum.cast_time||0)],['Attack Speed',sum.attack_speed]],attack:[['Melee Attack Speed',null],...['Melee','Ranged','Magic'].flatMap(x=>[...['Accuracy','Critical Rate',x==='Magic'?'Critical Bonus':'Critical Damage','Backstab Damage','Skill Damage','PvE Skills'].map(y=>[y==='Backstab Damage'?'Backstab '+x+' Damage':x+' '+y,null]),['Effective '+x+' Power',null]]),['Focus',sum.focus],['Shield Defense Penetration Rate',null],['Shield Defense Penetration',null],['Defense Penetration',sum.defense_penetration],['Magic Defense Penetration',sum.magic_penetration],['Critical Heal Rate',sum.heal_crit],['Critical Heal Bonus',sum.heal_bonus],['Healing',sum.healing],['Effective Healing Power',null]],defense:[['Parry Rate',null],['Shield Block Rate',null],['Evasion',null],['Resilience',sum.resilience],['Crit Rate Reduction',null],['Crit Bonus Reduction',null],['Toughness',sum.toughness],['PvP Damage Reduction',null],['Received Damage Reduction',null],['Siege Damage Reduction',null],['PvE Damage Reduction',e.effects.totals.incoming_damage_mul_anti_npc],...['Melee','Ranged','Magic'].flatMap(x=>[[x+' Damage Reduction',null],['Fixed '+x+' Damage Reduction',null],['PvE '+x+' Damage Reduction',null],['Effective '+x+' Health',null]])],misc:[['Health Regen',null],['Continuous Health Regen',null],['Mana Regen',null],['Post-Cast Mana Regen',null],['Damage Converted to Health',null],['Received Healing',null],['Increased experience gain',null],['Loot Drop Rate',null],['Gold earned from hunting',null],['Stealth Detection',null]]};$('stats').replaceChildren();migrationButton.hidden=tab!=='core';$('stats').append(migrationButton);let attributeGrid;const groups={attack:{'Melee Attack Speed':'Melee','Ranged Accuracy':'Ranged','Magic Accuracy':'Magic','Focus':'Penetration','Critical Heal Rate':'Healing'},defense:{'Melee Damage Reduction':'Melee','Ranged Damage Reduction':'Ranged','Magic Damage Reduction':'Magic'},misc:{'Health Regen':'Regeneration','Received Healing':'Misc'}};for(const [label,raw]of fields[tab]){if(groups[tab]?.[label])$('stats').append(el('h4',groups[tab][label],'stat-group-heading'));if(tab==='core'&&label==='Strength'){attributeGrid=el('div',undefined,'stat-attributes');$('stats').append(attributeGrid);}if(tab==='core'&&label==='Move Speed'){$('stats').append(migrationButton);$('stats').append(el('div',undefined,'stat-divider'));}const manualAliases={'Melee Critical Damage':'melee_bonus','Ranged Critical Damage':'ranged_bonus','Magic Critical Bonus':'magic_bonus'};const key=manualAliases[label]||Object.keys(CharacterStats.effects).find(k=>CharacterStats.effects[k][0]===label);const alias={'Magic Critical Bonus':'Magic Critical Damage','Melee Critical Bonus':'Melee Critical Damage','Ranged Critical Bonus':'Ranged Critical Damage','Siege Damage Reduction':'Siege Dmg Decrease','Parry Rate':'Melee Parry Rate'};const meta=Object.values(effectDB.attributes).find(m=>m.name===(alias[label]||label));const manual=key?sum[key]:null;const fromEffects=meta?e.effects.totals[meta.attribute]:null;const value=derived[label]??raw??CharacterModel.statValue(label,derived,e,effectDB);const row=el('div',undefined,'stat'+(label.startsWith('Effective ')?' stat-effective':''));makeStatInspectable(row,label);row.append(el('span',label),el('b',Number((value??0).toFixed(/^(Physical Defense|Magic Defense|Effective .* Health)$/.test(label)?0:2)).toLocaleString('en-US')+CharacterModel.statUnit(label,meta)));if(tab==='core'&&['Physical Defense','Magic Defense'].includes(label))row.lastChild.textContent=Math.round(value??0).toLocaleString('en-US')+' ('+Number((100-(derived[(label==='Physical Defense'?'Melee':'Magic')+' Defense Damage Received']??100)).toFixed(2)).toLocaleString('en-US')+' %)';if(tab==='core'&&label==='Attack Speed')row.lastChild.textContent=Number((value??0).toFixed(2)).toLocaleString('en-US')+' ('+Number((derived['Attack Animation Speed']??0).toFixed(2)).toLocaleString('en-US')+' %)';if(tab==='core'&&['Strength','Spirit','Intelligence','Stamina','Agility'].includes(label))attributeGrid.append(row);else $('stats').append(row);}}
+function renderStats(){if(tab==='compare'){renderComparison();return;}if(tab==='builds'){renderBuildsTab();return;}const e=equipmentSummary(),sum=e.sum;const derived=loaded?CharacterModel.calculate(state,DB.items,effectDB,rules,e):{};$("healthTotal").textContent=Math.round(derived.Health||0).toLocaleString("en-US");$("manaTotal").textContent=Math.round(derived.Mana||0).toLocaleString("en-US");for(const [id,attribute]of [['healthTotal','max_health'],['manaTotal','max_mana']])if(e.effects.pending.some(p=>effectDB.attributes[p.raw?.unit_attribute_id]?.attribute===attribute&&p.reason?.startsWith('Armor grade buff'))){$(id).textContent+=' · Partial';$(id).title='Armor grade buff contribution is excluded because item-level data is unavailable.';}const score=C.equipmentScore(state,DB.items,rules);$('equipmentPoints').textContent=Number(score.total.toFixed(1)).toLocaleString('en-US')+(score.pending.length?' · Partial':'');$('equipmentPoints').title='Base '+score.base.toFixed(1)+' + gems / lunafrosts '+score.modifications.toFixed(1)+(score.pending.length?' · '+score.pending.map(p=>p.slot+': '+p.reason).join('; '):'');const coreStats=CharacterStats.keys.map(k=>[CharacterStats.effects[k][0],158+(state.migration?.[k]||0)+sum[k]]);const fields={core:[['Melee Attack',null],['Ranged Attack',null],['Magic Attack',null],['Healing Power',null],['Physical Defense',sum.defense],['Magic Defense',sum.magic_defense],...['Strength','Spirit','Intelligence','Stamina','Agility'].map(label=>coreStats.find(x=>x[0]===label)),['Move Speed',sum.move_speed],['Cast Time',100+(sum.cast_time||0)],['Attack Speed',sum.attack_speed]],attack:[['Melee Attack Speed',null],...['Melee','Ranged','Magic'].flatMap(x=>[...['Accuracy','Critical Rate',x==='Magic'?'Critical Bonus':'Critical Damage','Backstab Damage','Skill Damage','PvE Skills'].map(y=>[y==='Backstab Damage'?'Backstab '+x+' Damage':x+' '+y,null]),['Effective '+x+' Power',null]]),['Focus',sum.focus],['Shield Defense Penetration Rate',null],['Shield Defense Penetration',null],['Defense Penetration',sum.defense_penetration],['Magic Defense Penetration',sum.magic_penetration],['Critical Heal Rate',sum.heal_crit],['Critical Heal Bonus',sum.heal_bonus],['Healing',sum.healing],['Effective Healing Power',null]],defense:[['Parry Rate',null],['Shield Block Rate',null],['Evasion',null],['Resilience',sum.resilience],['Crit Rate Reduction',null],['Crit Bonus Reduction',null],['Toughness',sum.toughness],['PvP Damage Reduction',null],['Received Damage Reduction',null],['Siege Damage Reduction',null],['PvE Damage Reduction',e.effects.totals.incoming_damage_mul_anti_npc],...['Melee','Ranged','Magic'].flatMap(x=>[[x+' Damage Reduction',null],['Fixed '+x+' Damage Reduction',null],['PvE '+x+' Damage Reduction',null],['Effective '+x+' Health',null]])],misc:[['Health Regen',null],['Continuous Health Regen',null],['Mana Regen',null],['Post-Cast Mana Regen',null],['Damage Converted to Health',null],['Received Healing',null],['Increased experience gain',null],['Loot Drop Rate',null],['Gold earned from hunting',null],['Stealth Detection',null]]};$('stats').replaceChildren();migrationButton.hidden=tab!=='core';$('stats').append(migrationButton);let attributeGrid;const groups={attack:{'Melee Attack Speed':'Melee','Ranged Accuracy':'Ranged','Magic Accuracy':'Magic','Focus':'Penetration','Critical Heal Rate':'Healing'},defense:{'Melee Damage Reduction':'Melee','Ranged Damage Reduction':'Ranged','Magic Damage Reduction':'Magic'},misc:{'Health Regen':'Regeneration','Received Healing':'Misc'}};for(const [label,raw]of fields[tab]){if(groups[tab]?.[label])$('stats').append(el('h4',groups[tab][label],'stat-group-heading'));if(tab==='core'&&label==='Strength'){attributeGrid=el('div',undefined,'stat-attributes');$('stats').append(attributeGrid);}if(tab==='core'&&label==='Move Speed'){$('stats').append(migrationButton);$('stats').append(el('div',undefined,'stat-divider'));}const manualAliases={'Melee Critical Damage':'melee_bonus','Ranged Critical Damage':'ranged_bonus','Magic Critical Bonus':'magic_bonus'};const key=manualAliases[label]||Object.keys(CharacterStats.effects).find(k=>CharacterStats.effects[k][0]===label);const alias={'Magic Critical Bonus':'Magic Critical Damage','Melee Critical Bonus':'Melee Critical Damage','Ranged Critical Bonus':'Ranged Critical Damage','Siege Damage Reduction':'Siege Dmg Decrease','Parry Rate':'Melee Parry Rate'};const meta=Object.values(effectDB.attributes).find(m=>m.name===(alias[label]||label));const manual=key?sum[key]:null;const fromEffects=meta?e.effects.totals[meta.attribute]:null;const value=derived[label]??raw??CharacterModel.statValue(label,derived,e,effectDB);const row=el('div',undefined,'stat'+(label.startsWith('Effective ')?' stat-effective':''));makeStatInspectable(row,label);row.append(el('span',label),el('b',Number((value??0).toFixed(/^(Physical Defense|Magic Defense|Effective .* Health)$/.test(label)?0:2)).toLocaleString('en-US')+CharacterModel.statUnit(label,meta)));if(tab==='core'&&['Physical Defense','Magic Defense'].includes(label))row.lastChild.textContent=Math.round(value??0).toLocaleString('en-US')+' ('+Number((100-(derived[(label==='Physical Defense'?'Melee':'Magic')+' Defense Damage Received']??100)).toFixed(2)).toLocaleString('en-US')+' %)';if(tab==='core'&&label==='Attack Speed')row.lastChild.textContent=Number((value??0).toFixed(2)).toLocaleString('en-US')+' ('+Number((derived['Attack Animation Speed']??0).toFixed(2)).toLocaleString('en-US')+' %)';if(tab==='core'&&['Strength','Spirit','Intelligence','Stamina','Agility'].includes(label))attributeGrid.append(row);else $('stats').append(row);}}
 function weaponValue(key){let value=0,known=false;for(const v of Object.values(state.equipment)){const x=C.itemValues(find('items',v.id),v.grade,rules,v.temper)[key];if(x!=null){value+=x;known=true;}}return known?value:null;}
 function buffFamilies(){const map=new Map();for(const buff of DB.buffs){const m=buff.name?.match(/^(.+) \(Rank (\d+)\)$/);const key=m?'rank:'+m[1]:'id:'+buff.id;if(!map.has(key))map.set(key,[]);map.get(key).push({...buff,rank:m?Number(m[2]):null});}return [...map.values()].map(group=>group.sort((a,b)=>(a.rank??0)-(b.rank??0)||a.id-b.id));}
 const frequentBuffNames=["Amarendra IV's Blessing","Special Combat Boost: Ward","Jujube Juice","Kingdom's Heart","Kingdom's Shadow","To the Arena","Special Combat Boost: Zeal","Zeal","Health Lift","Bloomfang Powerstone","Hummingbird Ditty","Bulwark of Wisdom","Bulwark of Toughness","Bulwark of Power","Pigglewiggle's Stew","Pigglewiggle's Grand Feast","General","Blue Goblet of Honor","Yellow Goblet of Honor","Purple Goblet of Honor","Pink Goblet of Honor","Gray Goblet of Honor","Our Little Secret"].map(name=>name.toLowerCase());
@@ -111,7 +111,7 @@ migrationButton.onclick=()=>{migrationDraft={...state.migration};migrationRows={
 function migrationPreview(){const values=migrationDraft,available=-Object.values(values).reduce((a,b)=>a+b,0),moved=Object.values(values).reduce((a,b)=>a+Math.max(0,b),0);const preview={...state,migration:values},summary=CharacterModel.summarize(preview,DB.items,effectDB,rules),derived=CharacterModel.calculate(preview,DB.items,effectDB,rules,summary);for(const [key,row]of Object.entries(migrationRows)){row.total.textContent=Number(derived[CharacterStats.effects[key][0]].toFixed(2)).toLocaleString('en-US');row.delta.textContent=(values[key]>0?'+':'')+values[key];row.delta.className=values[key]>0?'migration-positive':values[key]<0?'migration-negative':'';for(const {button,step}of row.buttons){const next=values[key]+step,nextMoved=moved-Math.max(0,values[key])+Math.max(0,next);button.disabled=next< -155||next>300||available-step<0||nextMoved>300;}}$('migrationAvailable').textContent=available;$('migrationStatus').textContent=moved+' / 300 migrated'+(available?' · Assign the remaining points before applying.':'');$('applyMigration').disabled=available!==0;return values;}
 $('applyMigration').onclick=()=>{try{state.migration=CharacterStats.migration(migrationDraft);$('migrationDialog').close();renderStats();}catch(e){toast(e.message);}};$('resetMigration').onclick=()=>{migrationDraft=Object.fromEntries(CharacterStats.keys.map(k=>[k,0]));migrationPreview();};$('closeMigration').onclick=()=>$('migrationDialog').close();
 
-$('import').onclick=async()=>{try{state=await readBuildInput($('code').value.trim());$('codeDialog').close();hydrate();toast('Build loaded.');}catch(e){$('codeMessage').textContent=e.message;}};$('local').onclick=saveBrowserBuild;$('restore').onclick=()=>{const list=getSavedBuilds();if(list.length>1)return codeDialog(false);try{const code=list[0]?.code||localStorage.getItem('aac-build-v1');if(!code)return codeDialog(false);state=P.decode(code,DB,rules);hydrate();toast('Build restored.');}catch(e){toast(e.message);}};$('reset').onclick=()=>{state=P.empty();render();toast('Build cleared.');};
+$('import').onclick=async()=>{try{state=await readBuildInput($('code').value.trim());$('codeDialog').close();hydrate();toast('Build loaded.');}catch(e){$('codeMessage').textContent=e.message;}};$('local').onclick=saveBrowserBuild;$('restore').onclick=()=>{tab='builds';for(const b of $('statTabs').children)b.classList.toggle('active',b.dataset.tab==='builds');renderStats();$('stats')?.scrollIntoView({behavior:'smooth',block:'nearest'});};$('reset').onclick=()=>{activeAccountBuildId=null;state=P.empty();render();toast('Build cleared.');};
 if($('undoBuild'))$('undoBuild').onclick=()=>{if(historyStack.length<=1)return;redoStack.push(historyStack.pop());suppressHistory=true;try{state=JSON.parse(historyStack.at(-1));hydrate();toast('Undid last change.');}finally{suppressHistory=false;syncUndoRedo();}};
 if($('redoBuild'))$('redoBuild').onclick=()=>{if(!redoStack.length)return;const next=redoStack.pop();historyStack.push(next);suppressHistory=true;try{state=JSON.parse(next);hydrate();toast('Redid change.');}finally{suppressHistory=false;syncUndoRedo();}};
 document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&!e.target.closest('input,textarea,select')){if(e.key.toLowerCase()==='z'&&!e.shiftKey&&$('undoBuild')&&!$('undoBuild').disabled){e.preventDefault();$('undoBuild').click();}else if((e.key.toLowerCase()==='y'||(e.key.toLowerCase()==='z'&&e.shiftKey))&&$('redoBuild')&&!$('redoBuild').disabled){e.preventDefault();$('redoBuild').click();}}});
@@ -119,7 +119,135 @@ if($('batchGear')){$('batchGear').onclick=()=>{if(!loaded)return toast('Wait for
 if($('saveBuffPreset'))$('saveBuffPreset').onclick=()=>{try{localStorage.setItem('aac-buff-preset-v1',JSON.stringify(state.buffs||[]));toast(`Saved ${state.buffs.length} active buffs as preset.`);}catch{toast('Browser storage unavailable.');}};
 if($('applyBuffPreset'))$('applyBuffPreset').onclick=()=>{try{const raw=localStorage.getItem('aac-buff-preset-v1');if(!raw)return toast('No buff preset saved yet.');const ids=JSON.parse(raw).filter(id=>find('buffs',id));state.buffs=[...new Set([...(state.buffs||[]),...ids])].slice(0,500);hydrate();toast(`Applied buff preset (${ids.length} buffs).`);}catch{toast('Could not load buff preset.');}};
 if($('clearActiveBuffs'))$('clearActiveBuffs').onclick=()=>{const passiveChildIds=new Set(Object.values(effectDB.passives||{}).flatMap(p=>[...(p.children||[]).map(c=>c.buff_id),...(p.related||[])]));state.buffs=(state.buffs||[]).filter(id=>passiveChildIds.has(id));render();toast('Cleared manual buffs.');};
-async function init(){loaded=false;$('status').textContent='Loading catalogs…';$('refresh').disabled=true;try{await Promise.all(['items','buffs','skills'].map(async k=>DB[k]=await api(k,'_index')));const effectResponse=await fetch('/equipment-effects.json');if(!effectResponse.ok)throw Error('Equipment effect data unavailable');effectDB=await effectResponse.json();const r=await fetch('/rules.json');if(r.ok)rules=await r.json();for(const i of DB.items){const a=rules.synthesis_items?.[String(i.id)]||rules.armors?.[String(i.id)]||rules.accessories?.[String(i.id)];if(a)i.db_slot=a.slot_type_id;}loaded=true;$('status').textContent=`${DB.items.length.toLocaleString('en-US')} items · local catalog · Oct 11, 2026`;render();if(!sharedLinkLoaded){sharedLinkLoaded=true;const id=new URL(location.href).searchParams.get('s');if(id){try{state=await readBuildInput(id);hydrate();toast('Shared build loaded.');}catch(error){toast(error.message);}}}}catch(e){$('status').textContent='Loading failed';toast(e.message);}finally{$('refresh').disabled=false;}}$('refresh').onclick=()=>{details.clear();init();};render();init();
+let authState={authenticated:false,configured:false,isLocalhost:false,user:null},accountBuilds=[],activeAccountBuildId=null,renamingBuildId=null;
+function startDiscordLogin(){location.href=authState.configured?'/api/auth/discord':authState.isLocalhost?'/api/auth/discord?dev=1':'/api/auth/discord';}
+function renderAuthBar(){
+ const bar=$('authBar');if(!bar)return;bar.replaceChildren();
+ if(authState.authenticated&&authState.user){
+  const chip=el('button',undefined,'discord-user-chip');chip.type='button';chip.title='Open My Saved Builds';
+  if(authState.user.avatarUrl){const img=el('img');img.src=authState.user.avatarUrl;img.alt='';chip.append(img);}else chip.append(el('span','◈','discord-avatar-fallback'));
+  chip.append(el('span',authState.user.displayName||authState.user.username));
+  chip.onclick=()=>{tab='builds';for(const b of $('statTabs').children)b.classList.toggle('active',b.dataset.tab==='builds');renderStats();};
+  const out=el('button','Sign out','discord-logout-btn');out.type='button';
+  out.onclick=async()=>{try{await fetch('/api/auth/logout',{method:'POST'});authState.authenticated=false;authState.user=null;accountBuilds=[];activeAccountBuildId=null;renderAuthBar();if(tab==='builds')renderStats();toast('Signed out.');}catch{toast('Could not sign out.');}};
+  bar.append(chip,out);
+ }else{
+  const btn=el('button','Sign in with Discord','discord-login-btn');btn.type='button';
+  btn.onclick=startDiscordLogin;
+  bar.append(btn);
+ }
+}
+async function loadAccountBuilds(){
+ if(!authState.authenticated){accountBuilds=[];return;}
+ try{const r=await fetch('/api/my-builds');if(r.ok){const data=await r.json();accountBuilds=data.builds||[];if(tab==='builds')renderStats();}}catch{}
+}
+async function loadAuth(){
+ try{const r=await fetch('/api/auth/me');if(r.ok)authState=await r.json();}catch{}
+ renderAuthBar();
+ if(authState.authenticated)await loadAccountBuilds();
+ const u=new URL(location.href);
+ if(u.searchParams.get('tab')==='builds'){tab='builds';for(const b of $('statTabs').children)b.classList.toggle('active',b.dataset.tab==='builds');u.searchParams.delete('tab');history.replaceState(null,'',u.pathname+u.search+u.hash);renderStats();}
+ if(u.searchParams.get('auth_error')){toast('Discord sign-in could not be completed ('+u.searchParams.get('auth_error')+').');u.searchParams.delete('auth_error');history.replaceState(null,'',u.pathname+u.search+u.hash);}
+}
+async function saveAccountBuild(overwriteId=null,customBuild=null){
+ if(!authState.authenticated)return toast('Sign in with Discord first.');
+ const payloadBuild=customBuild||state;
+ try{
+  const r=await fetch(overwriteId?'/api/my-builds/'+encodeURIComponent(overwriteId):'/api/my-builds',{method:overwriteId?'PUT':'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({build:payloadBuild})});
+  const data=await r.json();if(!r.ok)throw Error(data.error||'Could not save build.');
+  activeAccountBuildId=data.build.id;
+  await loadAccountBuilds();renderStats();
+  toast(overwriteId?'Updated "'+data.build.name+'" in your account.':'Saved "'+data.build.name+'" to your account.');
+ }catch(e){toast(e.message);}
+}
+async function deleteAccountBuild(id,name){
+ try{
+  const r=await fetch('/api/my-builds/'+encodeURIComponent(id),{method:'DELETE'});
+  const data=await r.json();if(!r.ok)throw Error(data.error||'Could not delete build.');
+  if(activeAccountBuildId===id)activeAccountBuildId=null;
+  await loadAccountBuilds();renderStats();
+  toast('Deleted "'+name+'".');
+ }catch(e){toast(e.message);}
+}
+function renderBuildsTab(){
+ const panel=$('stats');panel.replaceChildren();migrationButton.hidden=true;
+ const acctSec=el('section',undefined,'builds-tab-section');
+ const acctHeader=el('div',undefined,'builds-tab-header');
+ acctHeader.append(el('h3','Discord Account Builds'),el('small',authState.authenticated?`${accountBuilds.length} / 50`:'Cloud sync','muted'));
+ acctSec.append(acctHeader);
+ if(!authState.authenticated){
+  const box=el('div',undefined,'discord-promo-box');
+  box.append(el('p','Sign in with Discord to save up to 50 builds to your account, edit them anytime, rename, delete or compare across devices.','muted'));
+  const btn=el('button',!authState.configured&&authState.isLocalhost?'Sign in with Discord (Local Preview)':'Sign in with Discord','discord-login-btn');
+  btn.type='button';btn.onclick=startDiscordLogin;box.append(btn);
+  if(!authState.configured&&authState.isLocalhost)box.append(el('small','Localhost preview mode is active. Add DISCORD_CLIENT_ID and DISCORD_CLIENT_SECRET in .env for live Discord OAuth.','muted'));
+  acctSec.append(box);
+ }else{
+  const toolbar=el('div',undefined,'comparison-tools');
+  const saveNewBtn=el('button','＋ Save current as new','primary');saveNewBtn.type='button';
+  saveNewBtn.onclick=()=>saveAccountBuild(null);
+  toolbar.append(saveNewBtn);
+  const activeItem=accountBuilds.find(b=>b.id===activeAccountBuildId);
+  if(activeItem){
+   const updateActiveBtn=el('button','💾 Save changes to "'+activeItem.name+'"');updateActiveBtn.type='button';
+   updateActiveBtn.onclick=()=>saveAccountBuild(activeItem.id);
+   toolbar.append(updateActiveBtn);
+  }
+  acctSec.append(toolbar);
+  const list=el('div',undefined,'saved-builds-list');
+  if(!accountBuilds.length)list.append(el('p','No builds saved in your Discord account yet. Click "Save current as new" above.','muted'));
+  for(const item of accountBuilds){
+   const isCurrent=item.id===activeAccountBuildId;
+   const row=el('div',undefined,'saved-build-row'+(isCurrent?' active-saved-build':'')),info=el('div',undefined,'saved-build-info'),acts=el('div',undefined,'actions');
+   const clsTitle=ClassPoints.className(item.classes||[]);
+   if(renamingBuildId===item.id){
+    const nameInput=el('input');nameInput.value=item.name;nameInput.maxLength=80;nameInput.setAttribute('aria-label','Rename build');
+    const saveRename=el('button','Save','primary'),cancelRename=el('button','Cancel');saveRename.type=cancelRename.type='button';
+    saveRename.onclick=async()=>{const nextName=nameInput.value.trim()||'Unnamed build';renamingBuildId=null;if(isCurrent){state.name=nextName;$('name').value=nextName;}await saveAccountBuild(item.id,{...item.build,name:nextName});};
+    cancelRename.onclick=()=>{renamingBuildId=null;renderBuildsTab();};
+    info.append(nameInput);acts.append(saveRename,cancelRename);
+   }else{
+    const titleLine=el('strong',item.name+(isCurrent?' · Editing':''));
+    info.append(titleLine,el('small',(clsTitle?clsTitle+' · ':'')+((item.classes||[]).map(c=>names[c]||c).join(' / ')||'No class')+` · ${Math.round(item.equipmentPoints||0).toLocaleString('en-US')} GS`,'muted'));
+    const loadBtn=el('button','Load'),overBtn=el('button','Overwrite'),renBtn=el('button','Rename'),compBtn=el('button','Compare'),delBtn=el('button','×','danger');
+    loadBtn.type=overBtn.type=renBtn.type=compBtn.type=delBtn.type='button';
+    loadBtn.onclick=()=>{state=structuredClone(item.build);activeAccountBuildId=item.id;hydrate();toast('Loaded "'+item.name+'".');};
+    overBtn.title='Overwrite this saved build with the current editor build';
+    overBtn.onclick=()=>saveAccountBuild(item.id,{...state,name:state.name||item.name});
+    renBtn.onclick=()=>{renamingBuildId=item.id;renderBuildsTab();};
+    compBtn.onclick=()=>{comparisonBuild=structuredClone(item.build);comparisonCode=item.name;tab='compare';for(const b of $('statTabs').children)b.classList.toggle('active',b.dataset.tab==='compare');renderStats();toast('Comparing against "'+item.name+'".');};
+    delBtn.title='Delete build';
+    delBtn.onclick=()=>deleteAccountBuild(item.id,item.name);
+    acts.append(loadBtn,overBtn,renBtn,compBtn,delBtn);
+   }
+   row.append(info,acts);list.append(row);
+  }
+  acctSec.append(list);
+ }
+ const localSec=el('section',undefined,'builds-tab-section');
+ const localHeader=el('div',undefined,'builds-tab-header');
+ const localList=getSavedBuilds();
+ localHeader.append(el('h3','Browser Local Builds'),el('small',`${localList.length} / 25`,'muted'));
+ const localTools=el('div',undefined,'comparison-tools'),saveLocalBtn=el('button','＋ Save current to browser');saveLocalBtn.type='button';
+ saveLocalBtn.onclick=()=>{saveBrowserBuild();renderBuildsTab();};
+ localTools.append(saveLocalBtn);
+ const localBox=el('div',undefined,'saved-builds-list');
+ if(!localList.length)localBox.append(el('p','No builds saved in this browser yet.','muted'));
+ for(const [idx,item]of localList.entries()){
+  const row=el('div',undefined,'saved-build-row'),info=el('div',undefined,'saved-build-info'),acts=el('div',undefined,'actions');
+  const clsTitle=ClassPoints.className(item.classes||[]);
+  info.append(el('strong',item.name||'Unnamed build'),el('small',(clsTitle?clsTitle+' · ':'')+((item.classes||[]).map(c=>names[c]||c).join(' / ')||'No class')+(item.gs?` · ${item.gs} GS`:''),'muted'));
+  const loadBtn=el('button','Load'),compBtn=el('button','Compare'),delBtn=el('button','×','danger');
+  loadBtn.type=compBtn.type=delBtn.type='button';
+  loadBtn.onclick=()=>{try{state=P.decode(item.code,DB,rules);activeAccountBuildId=null;hydrate();toast('Loaded "'+item.name+'".');}catch(e){toast(e.message);}};
+  compBtn.onclick=()=>{try{comparisonBuild=P.decode(item.code,DB,rules);comparisonCode=item.name||'Saved build';tab='compare';for(const b of $('statTabs').children)b.classList.toggle('active',b.dataset.tab==='compare');renderStats();toast('Comparing against "'+item.name+'".');}catch(e){toast(e.message);}};
+  delBtn.onclick=()=>{const next=getSavedBuilds();next.splice(idx,1);setSavedBuilds(next);renderBuildsTab();};
+  acts.append(loadBtn,compBtn,delBtn);row.append(info,acts);localBox.append(row);
+ }
+ localSec.append(localHeader,localTools,localBox);
+ panel.append(acctSec,localSec);
+}
+async function init(){loaded=false;$('status').textContent='Loading catalogs…';$('refresh').disabled=true;try{await Promise.all(['items','buffs','skills'].map(async k=>DB[k]=await api(k,'_index')));const effectResponse=await fetch('/equipment-effects.json');if(!effectResponse.ok)throw Error('Equipment effect data unavailable');effectDB=await effectResponse.json();const r=await fetch('/rules.json');if(r.ok)rules=await r.json();for(const i of DB.items){const a=rules.synthesis_items?.[String(i.id)]||rules.armors?.[String(i.id)]||rules.accessories?.[String(i.id)];if(a)i.db_slot=a.slot_type_id;}loaded=true;$('status').textContent=`${DB.items.length.toLocaleString('en-US')} items · local catalog · Oct 11, 2026`;render();await loadAuth();if(!sharedLinkLoaded){sharedLinkLoaded=true;const id=new URL(location.href).searchParams.get('s');if(id){try{state=await readBuildInput(id);hydrate();toast('Shared build loaded.');}catch(error){toast(error.message);}}}}catch(e){$('status').textContent='Loading failed';toast(e.message);}finally{$('refresh').disabled=false;}}$('refresh').onclick=()=>{details.clear();init();};render();init();
 
 function enchantmentChoices(item){const seen=new Set();return DB.items.filter(g=>Sockets.enchantCompatible(g,item,rules)).sort((a,b)=>Math.max(0,b.grade)-Math.max(0,a.grade)||a.name.localeCompare(b.name,'en')||a.id-b.id).filter(g=>{const e=EquipmentEffects.itemEffects(g,Math.max(0,g.grade),effectDB);if(!e.entries.length||e.pending.length)return true;const key=JSON.stringify([e.entries.map(x=>[x.attribute,x.value,x.unit]).sort((a,b)=>JSON.stringify(a).localeCompare(JSON.stringify(b))),[...new Set(rules.enchants[g.id].map(r=>r.eiset_id).filter(Boolean))].sort((a,b)=>a-b)]);if(seen.has(key))return false;seen.add(key);return true;});}
 var hoverCard;

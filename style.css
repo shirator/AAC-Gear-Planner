@@ -312,3 +312,21 @@ select option:disabled{color:#929292}
 .buff-presets-bar{margin:6px 0 10px;gap:8px}
 .buff-presets-bar button{font-size:11px;padding:6px 10px}
 #batchGearDialog{width:min(480px,calc(100vw - 24px))}
+.auth-bar{display:flex;align-items:center;gap:8px}
+.discord-login-btn{background:#5865f2;border:1px solid #7289da;color:#fff;font-size:11px;font-weight:500;padding:6px 11px;border-radius:3px}
+.discord-login-btn:hover{background:#4752c4}
+.discord-user-chip{display:inline-flex;align-items:center;gap:7px;padding:4px 9px;background:#15181b;border:1px solid #5865f280;border-radius:3px;font-size:11px;color:#edf0f5}
+.discord-user-chip img{width:20px;height:20px;border-radius:50%;object-fit:cover}
+.discord-avatar-fallback{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#5865f2;color:#fff;font-size:10px}
+.discord-logout-btn{font-size:11px;padding:5px 8px;background:transparent;border:1px solid #ffffff24;color:var(--muted);border-radius:3px}
+.builds-tab-section{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.builds-tab-section:last-child{border-bottom:0;margin-bottom:0}
+.builds-tab-header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px}
+.builds-tab-header h3{margin:0;font-size:13px;color:var(--gold);font-weight:500}
+.discord-promo-box{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:12px;background:#0e1116;border:1px solid #5865f245;border-radius:3px}
+.discord-promo-box p{margin:0;font-size:12px;line-height:1.5}
+.saved-build-row.active-saved-build{border-color:#d1b47b99;background:#171a16}
+#stats .saved-builds-list{max-height:280px}
+#stats .saved-build-row{flex-wrap:wrap}
+#stats .saved-build-row .actions{display:flex;flex-wrap:wrap;gap:4px}
+#stats .saved-build-row .actions button{font-size:10px;padding:4px 7px}
