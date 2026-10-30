@@ -21,5 +21,37 @@ function toggle(state,kind,id,skills,passives,metadata={}){
  next[kind].push(id);return next;
 }
 function orderedSkills(skills,ability,metadata){return skills.filter(skill=>skill.show&&skill.category==='ability'&&skill.ability===ability).sort((a,b)=>(metadata[a.id]?.high_ability_id||0)-(metadata[b.id]?.high_ability_id||0)||(metadata[a.id]?.level??999)-(metadata[b.id]?.level??999)||a.id-b.id);}
-const api={isAbyssal,spent,total,prune,toggle,orderedSkills};if(typeof module!=='undefined')module.exports=api;else root.ClassPoints=api;
+const classNames={
+ 'adamant+death+fight':'Doomlord','adamant+death+illusion':'Defiler','adamant+death+love':'Justiciar','adamant+death+magic':'Battlemage','adamant+death+romance':'Dark Aegis','adamant+death+vocation':'Dreadnaught','adamant+death+wild':'Dreadstone','adamant+death+will':'Skullknight',
+ 'adamant+fight+illusion':'Hexblade','adamant+fight+love':'Paladin','adamant+fight+magic':'Crusader','adamant+fight+romance':'Dawncaller','adamant+fight+vocation':'Blighter','adamant+fight+wild':'Liberator','adamant+fight+will':'Abolisher',
+ 'adamant+illusion+love':'Shadowbane','adamant+illusion+magic':'Cabalist','adamant+illusion+romance':'Poxbane','adamant+illusion+vocation':'Shadowknight','adamant+illusion+wild':'Archon','adamant+illusion+will':'Dreambreaker',
+ 'adamant+love+magic':'Scion','adamant+love+romance':'Caretaker','adamant+love+vocation':'Death Warden','adamant+love+wild':'Druid','adamant+love+will':'Templar',
+ 'adamant+magic+romance':'Earthsinger','adamant+magic+vocation':'Swiftstone','adamant+magic+wild':'Farslayer','adamant+magic+will':'Thaumaturge',
+ 'adamant+romance+vocation':'Nightbearer','adamant+romance+wild':'Honorguard','adamant+romance+will':'Tomb Warden',
+ 'adamant+vocation+wild':'Stone Arrow','adamant+vocation+will':'Bastion','adamant+wild+will':'Redoubt',
+ 'death+fight+illusion':'Hordebreaker','death+fight+love':'Blackguard','death+fight+magic':'Ravager','death+fight+romance':'Lorebreaker','death+fight+vocation':'Executioner','death+fight+wild':'Dreadbow','death+fight+will':'Bloodreaver',
+ 'death+illusion+love':'Necromancer','death+illusion+magic':'Demonologist','death+illusion+romance':'Tombcaller','death+illusion+vocation':'Shroudmaster','death+illusion+wild':'Dreadhunter','death+illusion+will':'Nightcloak',
+ 'death+love+magic':'Cultist','death+love+romance':'Sorrowsong','death+love+vocation':'Doombringer','death+love+wild':'Ghosthunter','death+love+will':'Edgewalker',
+ 'death+magic+romance':'Requiem','death+magic+vocation':'Reaper','death+magic+wild':'Spellbow','death+magic+will':'Revenant',
+ 'death+romance+vocation':'Nocturne','death+romance+wild':'Banesong','death+romance+will':'Phantasm',
+ 'death+vocation+wild':'Shadehunter','death+vocation+will':'Planeshifter','death+wild+will':'Astral Ranger',
+ 'fight+illusion+love':'Dervish','fight+illusion+magic':'Harbinger','fight+illusion+romance':'Dirgeweaver','fight+illusion+vocation':'Shadowblade','fight+illusion+wild':'Hex Ranger','fight+illusion+will':'Hex Warden',
+ 'fight+love+magic':'Fleshshaper','fight+love+romance':'Bloodthrall','fight+love+vocation':'Inquisitor','fight+love+wild':'Warpriest','fight+love+will':'Argent',
+ 'fight+magic+romance':'Spellsword','fight+magic+vocation':'Hellweaver','fight+magic+wild':'Destroyer','fight+magic+will':'Enforcer',
+ 'fight+romance+vocation':'Blade Dancer','fight+romance+wild':'Bloodskald','fight+romance+will':'Herald',
+ 'fight+vocation+wild':'Outrider','fight+vocation+will':'Darkrunner','fight+wild+will':'Bonestalker',
+ 'illusion+love+magic':'Shaman','illusion+love+romance':'Athame','illusion+love+vocation':'Assassin','illusion+love+wild':'Soulbow','illusion+love+will':'Hierophant',
+ 'illusion+magic+romance':'Lamentor','illusion+magic+vocation':'Daggerspell','illusion+magic+wild':'Stormcaster','illusion+magic+will':'Arcanist',
+ 'illusion+romance+vocation':'Nightwitch','illusion+romance+wild':'Beguiler','illusion+romance+will':'Enchanter',
+ 'illusion+vocation+wild':'Trickster','illusion+vocation+will':'Eidolon','illusion+wild+will':'Arcane Hunter',
+ 'love+magic+romance':'Gypsy','love+magic+vocation':'Animist','love+magic+wild':'Soulmender','love+magic+will':'Boneweaver',
+ 'love+romance+vocation':'Confessor','love+romance+wild':'Soulsong','love+romance+will':'Cleric',
+ 'love+vocation+wild':'Ranger','love+vocation+will':'Soothsayer','love+wild+will':'Oracle',
+ 'magic+romance+vocation':'Spellsinger','magic+romance+wild':'Evoker','magic+romance+will':'Spellsong',
+ 'magic+vocation+wild':'Infiltrator','magic+vocation+will':'Enigmatist','magic+wild+will':'Stormchaser',
+ 'romance+vocation+wild':'Ebonsong','romance+vocation+will':'Exorcist','romance+wild+will':'Howler',
+ 'vocation+wild+will':'Primeval'
+};
+function className(classes){if(!Array.isArray(classes)||classes.length!==3)return null;const key=[...classes].sort().join('+');return classNames[key]||null;}
+const api={isAbyssal,spent,total,prune,toggle,orderedSkills,classNames,className};if(typeof module!=='undefined')module.exports=api;else root.ClassPoints=api;
 })(globalThis);

@@ -279,3 +279,36 @@ select option:disabled{color:#929292}
 @media(forced-colors:active){select option,select optgroup{background-color:Canvas;color:CanvasText}select option:disabled{color:GrayText}}
 
 .stat-sources-dialog .source-total{color:#f2f2f2}.stat-sources-dialog .source-total>b{color:#fff;font-weight:700}.stat-sources-dialog .source-part>b{color:#e7e9e7;white-space:nowrap}.stat-sources-dialog .source-modifiers{color:#b5bdc5;font-size:11px;font-weight:400}
+
+/* Enhanced planner productivity & simulation tools */
+.gem-editor-heading,.synthesis-header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px}
+.gem-editor-heading h3,.synthesis-header h3{margin:0!important}
+.gem-clear-btn,.synthesis-max-all{font-size:11px;padding:4px 8px;background:#191d1e;border:1px solid #ffffff26;color:var(--gold);border-radius:2px}
+.gem-row-wrap{display:flex;align-items:center;gap:6px;border-bottom:1px solid #ffffff0d}
+.gem-row-wrap .gem-row{flex:1;min-width:0}
+.gem-fill-btn{flex-shrink:0;font-size:11px;padding:5px 8px;background:#18241e;border:1px solid #4b8066;color:#d6f5e3;border-radius:2px;white-space:nowrap}
+.gem-fill-btn:hover{background:#23382e}
+.delta-preview:empty{display:none}
+.delta-preview{margin:12px 0;padding:10px 12px;background:#0e1312;border:1px solid #ffffff1a;border-radius:3px}
+.delta-preview h4{margin:0 0 8px;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--gold);font-weight:500}
+.delta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:4px 14px;font-size:12px}
+.delta-row{display:flex;justify-content:space-between;gap:8px;padding:2px 0}
+.delta-row span{color:var(--muted)}
+.delta-up strong{color:#7ee2a8;font-weight:600}
+.delta-down strong{color:#f28b82;font-weight:600}
+.comparison-tools{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.comparison-tools button{font-size:11px;padding:6px 9px}
+.pvp-sim-details{margin:12px 0;padding:10px;border:1px solid var(--line);background:#0b0e0f;border-radius:3px}
+.pvp-sim-details>summary{cursor:pointer;color:var(--gold);font-size:12px;font-weight:500}
+.saved-builds-section{margin-top:16px;padding-top:12px;border-top:1px solid var(--line)}
+.saved-builds-section h3{margin:0 0 8px;font-size:13px;color:var(--gold);font-weight:500}
+.saved-builds-list{display:flex;flex-direction:column;gap:6px;max-height:220px;overflow-y:auto}
+.saved-build-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;background:#111415;border:1px solid #ffffff18;border-radius:2px}
+.saved-build-info{display:flex;flex-direction:column;gap:2px;min-width:0}
+.saved-build-info strong{font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.saved-build-row .actions{margin:0;flex-shrink:0}
+.saved-build-row .actions button{font-size:11px;padding:5px 8px}
+#characterSettingsDialog.class-mode #buffPresetsBar{display:none}
+.buff-presets-bar{margin:6px 0 10px;gap:8px}
+.buff-presets-bar button{font-size:11px;padding:6px 10px}
+#batchGearDialog{width:min(480px,calc(100vw - 24px))}

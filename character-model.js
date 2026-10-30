@@ -32,6 +32,34 @@ function statValue(label,derived,summary,db){
  return (manualAliases[label]?(manual==null&&fromEffects==null?0:(manual||0)+(fromEffects||0)):manual??fromEffects)??0;
 }
 function comparisonStats(state,items,db,rules){const C=typeof module!=='undefined'?require('./calculator.js'):root.Calculator,summary=summarize(state,items,db,rules),derived=calculate(state,items,db,rules,summary);const values=Object.fromEntries(comparisonLabels.map(label=>[label,statValue(label,derived,summary,db)]));values['Equipment Points']=C.equipmentScore(state,items,rules).total;return values;}
-function statUnit(label,meta){if(label==='Damage Converted to Health')return ' %';if(label==='Move Speed')return ' m/s';if(label==='Melee Attack Speed')return ' secs';if(label==='Melee Attack Speed')return ' secs';if(label.startsWith('Effective '))return '';if(['Crit Rate Reduction','Crit Bonus Reduction','PvP Damage Reduction','Received Damage Reduction'].includes(label))return ' %';if(label==='Attack Speed'||label.startsWith('Fixed '))return '';if(['Evasion','Attack Animation Speed','Melee Damage Reduction','Ranged Damage Reduction','Magic Damage Reduction','Siege Damage Reduction','PvE Damage Reduction'].includes(label))return ' %';return meta?.unit_suffix==='%'||/Accuracy|Rate|Bonus|Damage$|Skills|Healing$|Cast Time|experience|Stealth/.test(label)&&!/Attack|Defense$/.test(label)?' %':'';}
-const api={calculate,summarize,statUnit,statValue,comparisonStats,comparisonLabels};if(typeof module!=='undefined')module.exports=api;else root.CharacterModel=api;
+function statUnit(label,meta){if(label==='Damage Converted to Health')return ' %';if(label==='Move Speed')return ' m/s';if(label==='Melee Attack Speed')return ' secs';if(label.startsWith('Effective '))return '';if(['Crit Rate Reduction','Crit Bonus Reduction','PvP Damage Reduction','Received Damage Reduction'].includes(label))return ' %';if(label==='Attack Speed'||label.startsWith('Fixed '))return '';if(['Evasion','Attack Animation Speed','Melee Damage Reduction','Ranged Damage Reduction','Magic Damage Reduction','Siege Damage Reduction','PvE Damage Reduction'].includes(label))return ' %';return meta?.unit_suffix==='%'||/Accuracy|Rate|Bonus|Damage$|Skills|Healing$|Cast Time|experience|Stealth/.test(label)&&!/Attack|Defense$/.test(label)?' %':'';}
+function simulateVsTarget(attackerState,targetState,items,db,rules){
+ const attSum=summarize(attackerState,items,db,rules),att=calculate(attackerState,items,db,rules,attSum);
+ const defSum=summarize(targetState,items,db,rules),def=calculate(targetState,items,db,rules,defSum);
+ const get=(label,d,s)=>statValue(label,d,s,db);
+ const critRateRed=def['Crit Rate Reduction']||0,critBonusRed=def['Crit Bonus Reduction']||0,pvpRed=(def['PvP Damage Reduction']||0)/100;
+ const out={};
+ for(const kind of ['Melee','Ranged','Magic']){
+  const isMagic=kind==='Magic';
+  const rawDef=def[isMagic?'Magic Defense':'Physical Defense']||0;
+  const pen=get(isMagic?'Magic Defense Penetration':'Defense Penetration',att,attSum)||0;
+  const effDef=Math.max(0,rawDef-pen);
+  const defReceived=7900/(effDef+7900);
+  const dmgRed=(def[kind+' Damage Reduction']||0)/100;
+  const netReceived=Math.max(0,(1-dmgRed)*defReceived*(1-pvpRed));
+  const netMitigation=(1-netReceived)*100;
+  const attCritRate=att[kind+' Critical Rate']||0;
+  const attCritBonus=att[kind+(isMagic?' Critical Bonus':' Critical Damage')]||0;
+  const netCritRate=Math.max(0,Math.min(100,attCritRate-critRateRed));
+  const netCritBonus=Math.max(0,attCritBonus-critBonusRed);
+  const skillBonus=get(kind+' Skill Damage',att,attSum)||0;
+  const accuracy=(att[kind+' Accuracy']||100)/100;
+  const attack=att[kind+' Attack']||0;
+  const expectedHit=attack*(1+skillBonus/100)*netReceived;
+  const expectedAvg=expectedHit*(1+(netCritRate/100)*(netCritBonus/100))*accuracy;
+  out[kind]={attack,rawDef,pen,effDef,netMitigation,netCritRate,netCritBonus,expectedHit,expectedAvg};
+ }
+ return out;
+}
+const api={calculate,summarize,statUnit,statValue,comparisonStats,comparisonLabels,simulateVsTarget};if(typeof module!=='undefined')module.exports=api;else root.CharacterModel=api;
 })(globalThis);
