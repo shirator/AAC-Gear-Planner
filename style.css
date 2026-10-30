@@ -50,7 +50,7 @@ main{grid-template-columns:minmax(360px,420px) minmax(0,1fr)}main>*,.workspace,.
 
 .stat.stat-effective{border-left:2px solid #d4aaef;padding-left:8px;margin-top:7px;background:rgba(180,125,220,.06)}.stat.stat-effective>span,.stat.stat-effective>b{color:#d4aaef}
 
-.active-buff-chip{position:relative;padding:6px 7px 0 0}.remove-active-buff{position:absolute;right:0;top:0;width:22px;height:22px;padding:0;min-height:0;border-radius:50%;line-height:18px;font-size:18px;background:#263b36;color:#fff;border:1px solid #8ca69d;opacity:0;cursor:pointer}.active-buff-chip:hover .remove-active-buff,.active-buff-chip:focus-within .remove-active-buff{opacity:1}.remove-active-buff:hover{background:#793e47}.remove-active-buff:focus-visible{outline:2px solid #ffcf83;outline-offset:2px}@media(hover:none),(pointer:coarse){.active-buff-chip{padding:8px 10px 0 0}.remove-active-buff{opacity:1;width:28px;height:28px;line-height:24px}}
+.active-buff-chip{position:relative;display:inline-flex;padding:0;vertical-align:top}.remove-active-buff{position:absolute;right:-5px;top:-5px;z-index:3;width:20px;height:20px;padding:0;min-height:0;border-radius:50%;line-height:16px;font-size:15px;background:#263b36;color:#fff;border:1px solid #8ca69d;opacity:0;cursor:pointer}.active-buff-chip:hover .remove-active-buff,.active-buff-chip:focus-within .remove-active-buff{opacity:1}.remove-active-buff:hover{background:#793e47}.remove-active-buff:focus-visible{outline:2px solid #ffcf83;outline-offset:2px}@media(hover:none),(pointer:coarse){.active-buff-chip{padding:0}.remove-active-buff{opacity:1;width:24px;height:24px;line-height:20px}}
 
 .buff-section-heading{grid-column:1/-1;margin:12px 0 4px;padding-bottom:8px;border-bottom:1px solid #3a4943;color:#efd193;font-size:14px}
 
