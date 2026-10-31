@@ -330,3 +330,6 @@ select option:disabled{color:#929292}
 #stats .saved-build-row{flex-wrap:wrap}
 #stats .saved-build-row .actions{display:flex;flex-wrap:wrap;gap:4px}
 #stats .saved-build-row .actions button{font-size:10px;padding:4px 7px}
+#healthTotal{color:#65c441!important;font-weight:600}
+#manaTotal{color:#5588ed!important;font-weight:600}
+#equipmentPoints{color:#f0c954!important;font-weight:600}
