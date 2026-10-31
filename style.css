@@ -10,7 +10,7 @@
 
 #passiveResults{max-height:480px;overflow:auto}#activeBuffIcons{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px}
 
-.item-tooltip{overflow:auto;pointer-events:auto}
+.item-tooltip{overflow:auto;pointer-events:none}
 
 .enchant-list .enchant-choice.active,.enchant-list>button.active{border:2px solid #dbbb70;background:#332d1e;box-shadow:inset 0 0 0 1px #dbbb7030}.enchant-choice.active:hover{background:#403721;border-color:#f2d48c}.enchant-selected-badge{margin-left:auto;flex-shrink:0;color:#f2d48c;font-size:12px;font-weight:600}.enchant-choice>span:nth-child(2){min-width:0}
 
