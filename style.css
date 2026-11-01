@@ -333,3 +333,4 @@ select option:disabled{color:#929292}
 #healthTotal{color:#65c441!important;font-weight:600}
 #manaTotal{color:#5588ed!important;font-weight:600}
 #equipmentPoints{color:#f0c954!important;font-weight:600}
+.buff-card-effects{color:#9ec4ad;font-size:11px;display:block;margin-top:3px}
