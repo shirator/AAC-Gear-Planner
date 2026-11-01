@@ -283,7 +283,7 @@ select option:disabled{color:#929292}
 /* Enhanced planner productivity & simulation tools */
 .gem-editor-heading,.synthesis-header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px}
 .gem-editor-heading h3,.synthesis-header h3{margin:0!important}
-.gem-clear-btn,.synthesis-max-all{font-size:11px;padding:4px 8px;background:#191d1e;border:1px solid #ffffff26;color:var(--gold);border-radius:2px}
+.gem-clear-btn,.synthesis-max-all{font-size:11px;padding:4px 8px;background:#191d1e;border:1px solid #ffffff26;color:var(--gold);border-radius:2px}.synthesis-header-actions{display:flex;gap:6px}
 .gem-row-wrap{display:flex;align-items:center;gap:6px;border-bottom:1px solid #ffffff0d}
 .gem-row-wrap .gem-row{flex:1;min-width:0}
 .gem-fill-btn{flex-shrink:0;font-size:11px;padding:5px 8px;background:#18241e;border:1px solid #4b8066;color:#d6f5e3;border-radius:2px;white-space:nowrap}
