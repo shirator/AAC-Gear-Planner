@@ -1,7 +1,7 @@
 import sqlite3,json
 from pathlib import Path
 p=Path(__file__).parent
-c=sqlite3.connect('file:C:/Users/cmesq/Downloads/compact-3503AAClassic-20260925/compact.sqlite3?mode=ro',uri=True);c.row_factory=sqlite3.Row
+c=sqlite3.connect('file:'+os.environ.get('AAC_SQLITE','compact.sqlite3')+'?mode=ro',uri=True);c.row_factory=sqlite3.Row
 rules=json.loads((p/'data/rules.json').read_text(encoding='utf8'))
 items={str(r['item_id']):r['item_rnd_attr_category_id'] for r in c.execute('select item_id,item_rnd_attr_category_id from item_armors where slot_type_id in (9,12,13,31)')}
 categories=set(items.values())-{0}

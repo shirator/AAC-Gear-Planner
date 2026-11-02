@@ -2,7 +2,7 @@
 import sqlite3,json
 from pathlib import Path
 p=Path(__file__).parent
-c=sqlite3.connect('file:C:/Users/cmesq/Downloads/compact-3503AAClassic-20260925/compact.sqlite3?mode=ro',uri=True);c.row_factory=sqlite3.Row
+c=sqlite3.connect('file:'+os.environ.get('AAC_SQLITE','compact.sqlite3')+'?mode=ro',uri=True);c.row_factory=sqlite3.Row
 rules=json.loads((p/'data/rules.json').read_text(encoding='utf8'))
 rules['score']={'formulas':{str(r['id']):r['formula'] for r in c.execute('select * from formulas where id in (30,31,32)')},'slots':{str(r['slot_type_id']):r['gear_score_multiplier'] for r in c.execute('select * from wearable_slots')},'levels':{str(r['id']):r['level'] for r in c.execute('select id,level from items')},'source':'compact-3503AAClassic-20260925 formulas 30/31/32; aa-classic public item calculator normalizes stat_multiplier and gear_score_multiplier by 100 ; native screenshot retains one decimal, so calculation retains precision.'}
 catalog={x['id']:x for x in json.loads((p/'data/skills.json').read_text(encoding='utf8'))};buffs={x['id']:x for x in json.loads((p/'data/buffs.json').read_text(encoding='utf8'))}

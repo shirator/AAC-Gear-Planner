@@ -2,7 +2,7 @@
 import sqlite3,json,hashlib
 from pathlib import Path
 p=Path(__file__).parent
-source=Path('C:/Users/cmesq/Downloads/compact-3503AAClassic-20260925/compact.sqlite3')
+source=Path(os.environ.get('AAC_SQLITE','compact.sqlite3'))
 c=sqlite3.connect(source.resolve().as_uri()+'?mode=ro',uri=True);c.row_factory=sqlite3.Row
 catalog={i['id']:i for i in json.loads((p/'data/items.json').read_text(encoding='utf8'))}
 attrs=json.loads((p/'data/attribute-map.json').read_text(encoding='utf8'))
