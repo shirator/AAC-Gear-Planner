@@ -22,3 +22,5 @@ data/skills-[0-9]*.json
 
 # Gerado por npm run audit
 data/checkup.json
+__pycache__/ 
+*.pyc 
