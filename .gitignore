@@ -7,5 +7,19 @@ node_modules/
 *.sqlite-wal
 *.sqlite-shm
 *.tmp
-assets/*-preview.*
-assets/night-wallpaper.*
+
+# Runtime cache written by server.cjs (/api/<kind>/<id>.json); keep the test fixture.
+data/items-*.json
+data/buffs-*.json
+data/skills-*.json
+!data/items-9002460.json
+
+# Cache baixado em runtime pelo server.cjs
+data/items-[0-9]*.json
+data/buffs-[0-9]*.json
+data/skills-[0-9]*.json
+!data/items-9002460.json
+data/icons/
+
+# Gerado por npm run audit
+data/checkup.json

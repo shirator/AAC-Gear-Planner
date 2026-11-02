@@ -1,1 +1,0 @@
-{"id":558,"name":"Quick Recovery","description":"Resets cooldowns on all Vitalism healing skills after receiving critical damage.\nThis ability has a |cFFFF9C2712 sec|r cooldown once triggered.","icon":"icon_skill_love04.png","duration":0,"duration_text":null,"tick":0,"kind_id":1,"kind":"buff","stack_rule_id":1,"stack_rule":"refresh","max_stack":1,"modifiers":[]}

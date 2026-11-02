@@ -1,1 +1,0 @@
-{"id":498,"name":"Absorb Damage","description":"Converts |cFFFF9C277%|r of received damage to health.","icon":"icon_skill_will02.png","duration":0,"duration_text":null,"tick":0,"kind_id":1,"kind":"buff","stack_rule_id":1,"stack_rule":"refresh","max_stack":1,"modifiers":[]}
