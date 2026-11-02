@@ -27,7 +27,10 @@ for row in c.execute('select item_id,tag_id from tagged_items'):
  if row['tag_id'] in required:
   tags=rules['item_tags'].setdefault(str(row['item_id']),[])
   if row['tag_id'] not in tags:tags.append(row['tag_id'])
-rules['accessories']={str(row['item_id']):dict(row) for row in c.execute('select a.*,i.level from item_accessories a join items i on i.id=a.item_id')}
+rules['accessories']={str(row['item_id']):dict(row) for row in c.execute('select a.*,i.level,s.coverage from item_accessories a join items i on i.id=a.item_id left join wearable_slots s on s.slot_type_id=a.slot_type_id')}
+# Accessory attribute weights use the same equip_item_attr_modifiers table as weapons and armor.
+accessory_mods={r['id']:{k:r[k] for k in ['str_weight','dex_weight','sta_weight','int_weight','spi_weight']} for r in c.execute('select * from equip_item_attr_modifiers')}
+for record in rules['accessories'].values():record['modifiers']=accessory_mods.get(record['mod_set_id'])
 rules['synthesis_items']={str(row['item_id']):dict(row) for row in c.execute('select item_id,slot_type_id,item_rnd_attr_category_id from item_armors where slot_type_id in (12,13,31)')}
 for row in c.execute('select w.item_id,h.speed from item_weapons w join holdables h on h.id=w.holdable_id'):
  if str(row['item_id']) in rules['weapons']:rules['weapons'][str(row['item_id'])]['speed']=row['speed']
