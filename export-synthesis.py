@@ -1,4 +1,4 @@
-import sqlite3,json
+import sqlite3,json,os
 from pathlib import Path
 p=Path(__file__).parent
 c=sqlite3.connect('file:'+os.environ.get('AAC_SQLITE','compact.sqlite3')+'?mode=ro',uri=True);c.row_factory=sqlite3.Row

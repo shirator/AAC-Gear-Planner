@@ -1,5 +1,5 @@
-import sqlite3,json,hashlib,pathlib,sys
-source=pathlib.Path(sys.argv[1] if len(sys.argv)>1 else os.environ.get('AAC_SQLITE','compact.sqlite3').resolve()
+import sqlite3,json,hashlib,pathlib,sys,os
+source=pathlib.Path(sys.argv[1] if len(sys.argv)>1 else os.environ.get('AAC_SQLITE','compact.sqlite3')).resolve()
 c=sqlite3.connect(source.as_uri()+'?mode=ro',uri=True);c.row_factory=sqlite3.Row
 out={'source':source.parent.name,'sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'grades':[dict(r) for r in c.execute('select * from item_grades')],'weapons':{},'armors':{},'wearable_formulas':{str(r['kind_id']):r['formula'] for r in c.execute('select * from wearable_formulas')}}
 mods={r['id']:{k:r[k] for k in ['str_weight','dex_weight','sta_weight','int_weight','spi_weight']} for r in c.execute('select * from equip_item_attr_modifiers')}

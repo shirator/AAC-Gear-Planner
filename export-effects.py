@@ -1,5 +1,5 @@
 """Audit all catalog equipment against the read-only Classic database."""
-import sqlite3,json,hashlib
+import sqlite3,json,hashlib,os
 from pathlib import Path
 p=Path(__file__).parent
 source=Path(os.environ.get('AAC_SQLITE','compact.sqlite3'))
